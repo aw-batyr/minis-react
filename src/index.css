@@ -96,6 +96,10 @@ button:focus-visible {
   .words h1 {
     @apply leading-[100%];
   }
+
+  .track {
+    @apply -tracking-[0.4vw];
+  }
 }
 
 @media (prefers-color-scheme: light) {
