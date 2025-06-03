@@ -1,5 +1,7 @@
 import { useRef, type FC } from "react";
 import clsx from "clsx";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
 
 interface Props {
   title: string;
@@ -16,24 +18,45 @@ export const AnimatedTitle: FC<Props> = ({
   textClassName,
   decorClassName,
 }) => {
-  const textRef = useRef<HTMLHeadingElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const textRef = useRef<HTMLHeadingElement>(null);
 
-  // useGSAP(() => {
-  //   gsap.set(containerRef.current, { width: 0 });
-  //   // анимация до auto (fit-content)
-  //   gsap.to(containerRef.current, {
-  //     width: "auto",
-  //     duration: 0.6,
-  //     ease: "power2.out",
-  //     transformOrigin: "right",
-  //   });
-  // }, []);
+  useGSAP(
+    () => {
+      if (!containerRef.current || !textRef.current) return;
+
+      // Начальное состояние
+      gsap.set(containerRef.current, {
+        opacity: 0,
+        scaleX: 0,
+        transformOrigin: "center center",
+      });
+
+      // Анимация
+      gsap.to(containerRef.current, {
+        opacity: 1,
+        scaleX: 1,
+        duration: 1.2,
+        ease: "power3.out",
+        overwrite: "auto",
+      });
+
+      // Дополнительная анимация для текста (опционально)
+      gsap.from(textRef.current, {
+        opacity: 0,
+        duration: 0.8,
+        delay: 0.3,
+        ease: "power2.out",
+      });
+    },
+    { scope: containerRef, dependencies: [title] }
+  );
 
   return (
     <div
       ref={containerRef}
       className={clsx(
+        "will-change-transform", // Оптимизация для анимации
         "overflow-hidden inline-block relative",
         className,
         variant === 1 ? "bg-light-brown" : "bg-dark-brown relative z-10"
@@ -50,7 +73,7 @@ export const AnimatedTitle: FC<Props> = ({
       <h1
         ref={textRef}
         className={clsx(
-          "text-[8.95vw]  uppercase leading-[105%] text-white-text pl-[1vw] pr-[1.3vw] pb-[1.5vw] font-bold",
+          "text-[8.95vw] uppercase leading-[105%] text-white-text pl-[1vw] pr-[1.3vw] pb-[1.5vw] font-bold",
           textClassName
         )}
       >
