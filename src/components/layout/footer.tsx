@@ -2,12 +2,15 @@ import clsx from "clsx";
 import type { FC } from "react";
 import { socials } from "../../lib/constantas";
 import { Link } from "react-router-dom";
+import { useGSAP } from "@gsap/react";
 
 interface Props {
   className?: string;
 }
 
 export const Footer: FC<Props> = ({ className }) => {
+  useGSAP(() => {}, { dependencies: [], scope: "" });
+
   return (
     <footer className={clsx("bg-[#222123] pb-[1.56vw]", className)}>
       <div className="w-full h-[33vh] -mt-[0.3vw] z-10 ">
@@ -18,11 +21,12 @@ export const Footer: FC<Props> = ({ className }) => {
       </div>
 
       <div className="flex items-center gap-[0.72vw] justify-center mt-[3.333vw]">
-        {socials.map((item) => (
+        {socials.map((item, i) => (
           <Link
+          key={i}
             to={item.link}
             target="_blank"
-            className="size-[3.75vw] rounded-full p-[1.09vw] border border-[#FAEADE]/20"
+            className="size-[3.75vw] hover:border-[#FAEADE] hover:-translate-y-1  transition-all rounded-full p-[1.09vw] border border-[#FAEADE]/20"
           >
             <img
               src={item.icon}
