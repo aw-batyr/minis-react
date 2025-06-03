@@ -3,7 +3,7 @@ import { AnimatedTitle } from "../shared";
 
 export const Words: FC = () => {
   return (
-    <section className="bg-dark-brown words relative py-[8.333vw] uppercase text-center text-[10vw] -tracking-[0.4vw] text-light-bronw-text">
+    <section className="bg-dark-brown words relative py-[8.333vw] uppercase text-center text-[10vw] track text-light-bronw-text">
       <h1>Shu yere gowja</h1>
       <h1 className="mb-[5vw]">Moshny gowja soz</h1>
 
