@@ -9,7 +9,7 @@ function App() {
     >
       <Header />
 
-      <main className="flex-auto flex flex-col gap-40">
+      <main className="flex-auto">
         <Outlet />
       </main>
 
