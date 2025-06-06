@@ -3,8 +3,8 @@ import { AnimatedTitle } from "../shared";
 
 export const Hero: FC = () => {
   return (
-    <section className="section h-screen overflow-hidden relative">
-      <div className="">
+    <section className="sticky top-0 h-screen">
+      <div>
         <AnimatedTitle
           title="Mini’s dragee"
           className="-tracking-[0.4vw] rotate-[5deg] z-30 top-[13vw] left-1/2 -translate-x-1/2"
@@ -16,11 +16,7 @@ export const Hero: FC = () => {
         />
       </div>
 
-      <div
-        data-scroll
-        data-scroll-speed="0.3"
-        className="absolute left-0 top-[6vw] object-contain h-[15vw]"
-      >
+      <div className="absolute left-0 top-[6vw] object-contain h-[15vw]">
         <img src="/hero/decor.png" className="size-full object-contain" />
       </div>
 

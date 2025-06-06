@@ -23,33 +23,24 @@ export const AnimatedTitle: FC<Props> = ({
 
   useGSAP(
     () => {
-      if (!containerRef.current || !textRef.current) return;
-
-      // Начальное состояние
-      gsap.set(containerRef.current, {
-        opacity: 0,
-        scaleX: 0,
+      gsap.from(containerRef.current, {
+        width: 0,
+        autoAlpha: 0,
+        willChange: "opacity width",
         transformOrigin: "center center",
       });
-
-      // Анимация
       gsap.to(containerRef.current, {
-        opacity: 1,
-        scaleX: 1,
-        duration: 1.2,
-        ease: "power3.out",
-        overwrite: "auto",
-      });
+        scrollTrigger: {
+          trigger: containerRef.current,
+        },
+        autoAlpha: 1,
+        duration: 1,
+        delay: 1,
 
-      // Дополнительная анимация для текста (опционально)
-      gsap.from(textRef.current, {
-        opacity: 0,
-        duration: 0.8,
-        delay: 0.3,
-        ease: "power2.out",
+        width: "auto",
       });
     },
-    { scope: containerRef, dependencies: [title] }
+    { scope: containerRef }
   );
 
   return (
@@ -57,7 +48,7 @@ export const AnimatedTitle: FC<Props> = ({
       ref={containerRef}
       className={clsx(
         "will-change-transform", // Оптимизация для анимации
-        "overflow-hidden inline-block relative",
+        "overflow-hidden inline-block relative whitespace-nowrap",
         className,
         variant === 1 ? "bg-light-brown" : "bg-dark-brown relative z-10"
       )}
@@ -65,7 +56,7 @@ export const AnimatedTitle: FC<Props> = ({
       {variant === 2 && (
         <div
           className={clsx(
-            "h-[0.5vw] w-full bg-light-bg absolute bottom-0 right-0 -rotate-[1.5deg]",
+            "h-[0.5vw] w-full bg-light-bg absolute bottom-0 right-0 -rotate-[1.5deg] whitespace-nowrap",
             decorClassName
           )}
         />
@@ -73,7 +64,7 @@ export const AnimatedTitle: FC<Props> = ({
       <h1
         ref={textRef}
         className={clsx(
-          "text-[8.95vw] uppercase leading-[105%] text-white-text pl-[1vw] pr-[1.3vw] pb-[1.5vw] font-bold",
+          "text-[8.95vw] uppercase leading-[105%] whitespace-nowrap text-white-text pl-[1vw] pr-[1.3vw] pb-[1.5vw] font-bold",
           textClassName
         )}
       >
