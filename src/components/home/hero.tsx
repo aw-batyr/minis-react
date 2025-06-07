@@ -1,19 +1,45 @@
-import type { FC } from "react";
-import { AnimatedTitle } from "../shared";
+import { useGSAP } from "@gsap/react";
+import { useRef, type FC } from "react";
+import gsap from "gsap";
 
 export const Hero: FC = () => {
+  const containerRef = useRef(null);
+
+  useGSAP(
+    () => {
+      const tl = gsap.timeline();
+
+      tl.from(".light-text", {
+        autoAlpha: 0,
+        duration: 0.5,
+        willChange: "width",
+        transformOrigin: "center center",
+        width: 0,
+        opacity: 0,
+      });
+
+      tl.from(".dark-text", {
+        autoAlpha: 0,
+        duration: 0.5,
+        willChange: "width",
+        textAlign: "center",
+        width: 0,
+        opacity: 0,
+      });
+    },
+    { scope: containerRef }
+  );
+
   return (
-    <section className="sticky top-0 h-screen">
+    <section ref={containerRef} className="h-screen relative">
       <div>
-        <AnimatedTitle
-          title="Mini’s dragee"
-          className="-tracking-[0.4vw] rotate-[5deg] z-30 top-[13vw] left-1/2 -translate-x-1/2"
-        />
-        <AnimatedTitle
-          title="Unrepeatable taste"
-          variant={2}
-          className="-tracking-[0.4vw] rotate-[2.22deg] !px-[3vw] top-[11.5vw] left-1/2 -translate-x-1/2"
-        />
+        <h1 className="text-light-brown-block light-text rotate-[5deg] z-10 pos-x top-[13vw]">
+          Mini’s dragee
+        </h1>
+
+        <h1 className="text-dark-brown-block dark-text rotate-[2deg] pos-x top-[23vw]">
+          Unrepeatable taste
+        </h1>
       </div>
 
       <div className="absolute left-0 top-[6vw] object-contain h-[15vw]">
