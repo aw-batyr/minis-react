@@ -1,13 +1,13 @@
-import { About, Hero, Products, Slogan, Words } from "../components/home";
+import { Catalog, Hero, Products, Slogan, Words } from "../components/home";
 
 export default function Home() {
   return (
-    <div className="">
-      <Words />
+    <div className="overflow-hidden">
       <Hero />
+      <Words />
       <Products />
       <Slogan />
-      <About />
+      <Catalog />
     </div>
   );
 }
