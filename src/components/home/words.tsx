@@ -1,5 +1,4 @@
 import { useRef, type FC } from "react";
-import { AnimatedTitle } from "../shared";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { SplitText } from "gsap/SplitText";
@@ -9,35 +8,54 @@ gsap.registerPlugin(SplitText, ScrollTrigger);
 
 export const Words: FC = () => {
   const containerRef = useRef(null);
-  const textRef = useRef(null);
+  const minisTextRef = useRef(null);
+
+  console.log(window.innerHeight / 1);
 
   useGSAP(
     () => {
-      const { chars } = new SplitText(".text", {
-        type: "chars, lines",
-        linesClass: "line++",
-        charsClass: "char++",
-      });
+      document.fonts.ready.then(() => {
+        const { chars, revert } = new SplitText(".words", {
+          type: "chars, lines, words",
+          linesClass: "line++",
+        });
 
-      gsap.set(chars, {
-        autoAlpha: 0.3,
-        willChange: "opacity",
-      });
-
-      chars.forEach((char, index) => {
-        gsap.to(char, {
-          autoAlpha: 1,
-          duration: 1,
-          stagger: 0.05,
+        gsap.from(chars, {
           scrollTrigger: {
-            trigger: char,
-            start: "top 90%",
-            end: "top 20%",
-            toggleActions: "play none none none",
+            trigger: chars,
             markers: false,
-            id: `char-${index}`,
+            scrub: true,
+            start: `top ${window.innerHeight / 2.5}px`,
+            end: "bottom 10%",
+          },
+          autoAlpha: 0.5,
+          stagger: 0.5,
+          onComplete: () => {
+            revert();
           },
         });
+
+        gsap.fromTo(
+          minisTextRef.current,
+          {
+            width: 0,
+            transformOrigin: "center center",
+          },
+          {
+            width: "100%",
+            duration: 1.5,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: minisTextRef.current,
+              start: "top 80%", // Начинаем когда элемент на 80% высоты экрана
+              end: "bottom 30%",
+              scrub: true,
+              markers: true,
+              invalidateOnRefresh: true, // Важно для пересчета при изменении размера
+            },
+            willChange: "transform, opacity",
+          }
+        );
       });
     },
     { scope: containerRef }
@@ -46,12 +64,9 @@ export const Words: FC = () => {
   return (
     <section
       ref={containerRef}
-      className="bg-dark-brown words relative py-[8.333vw] uppercase text-center"
+      className="bg-dark-brown relative section py-[8vw]"
     >
-      <h1
-        ref={textRef}
-        className="text text-light-bronw-text text-[10vw] track"
-      >
+      <h2 className="text-white words text-[10vw] uppercase leading-[105%] track text-center">
         Shu yere gowja
         <br />
         Moshny gowja soz
@@ -59,13 +74,20 @@ export const Words: FC = () => {
         Yazmaly tipo slogan yaly
         <br />
         birzat bolmaly tapyndaa
-      </h1>
+      </h2>
 
-      <AnimatedTitle
-        title="Mini's"
-        textClassName="!text-dark-brown"
-        className="!bg-[#E8A460] border-[1vw] border-dark-brown rotate-6 px-[3vw] left-[36vw] !margin-0 top-[25vw] !absolute"
-      />
+      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+        {/* Контейнер для анимации */}
+        <div
+          ref={minisTextRef}
+          className="minis-text z-50 rotate-[4deg] origin-center overflow-hidden"
+        >
+          {/* Фиксированная ширина для стабильной анимации */}
+          <div className="text-light-brown-block !text-dark-brown border-dark-brown border-[1vw] px-[4vw] py-[1vw] inline-block">
+            Mini's
+          </div>
+        </div>{" "}
+      </div>
     </section>
   );
 };
