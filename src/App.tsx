@@ -1,12 +1,10 @@
 import { Outlet } from "react-router-dom";
-import { Footer, Header, SmoothScroll } from "./components/layout";
+import { Footer, Header } from "./components/layout";
+import ReactLenis from "lenis/react";
 
 function App() {
   return (
-    <SmoothScroll
-      className="flex flex-col min-h-screen bg-light-bg"
-      data-scroll-container
-    >
+    <ReactLenis root>
       <Header />
 
       <main className="flex-auto">
@@ -14,7 +12,7 @@ function App() {
       </main>
 
       <Footer />
-    </SmoothScroll>
+    </ReactLenis>
   );
 }
 
