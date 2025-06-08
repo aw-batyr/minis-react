@@ -44,13 +44,7 @@ export const Products: FC = () => {
           width: "100%",
           duration: 1.5,
           ease: "power2.out",
-          scrollTrigger: {
-            trigger: textRef.current,
-            start: "top 80%", // Начинаем когда элемент на 80% высоты экрана
-            end: "bottom 30%",
-            scrub: true,
-            invalidateOnRefresh: true, // Важно для пересчета при изменении размера
-          },
+          scrollTrigger: textRef.current,
           willChange: "transform, opacity",
         }
       );
@@ -64,19 +58,21 @@ export const Products: FC = () => {
   return (
     <section
       ref={containerRef}
-      className="h-screen relative track uppercase px-[5vw] text-[7vw] text-[#553124]"
+      className="h-screen flex items-center relative track uppercase px-[5vw] text-[7vw] text-[#553124]"
     >
-      <h2
-        ref={textRef}
-        className="text absolute whitespace-nowrap top-1/2 -translate-y-1/2"
-      >
-        Bizde 6
-        <br />
-        GORNUSH BAR
-      </h2>
+      <div className="w-1/2">
+        <h2 ref={textRef} className="text whitespace-nowrap">
+          Bizde 6
+          <br />
+          GORNUSH BAR
+        </h2>
 
-      <div className="text-light-brown-block overflow-hidden leading-none !pb-[1vw] border-[0.4vw] relative z-50 text-light-brown-block -rotate-[6deg] !px-[3vw] !text-[6vw] pos-y left-[12vw]">
-        Mini’s
+        <div className="text-light-brown-block overflow-hidden leading-none !pb-[1vw] border-[0.4vw] relative z-50 text-light-brown-block -rotate-[6deg] !px-[3vw] !text-[6vw] pos-y left-[12vw]">
+          Mini’s
+        </div>
+      </div>
+      <div className="flex items-center">
+        <img src="/products/product-1.png" alt="" />
       </div>
     </section>
   );
