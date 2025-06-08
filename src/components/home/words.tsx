@@ -39,18 +39,19 @@ export const Words: FC = () => {
           minisTextRef.current,
           {
             width: 0,
+            autoAlpha: 0,
             transformOrigin: "center center",
           },
           {
             width: "100%",
+            autoAlpha: 1,
             duration: 1.5,
             ease: "power2.out",
             scrollTrigger: {
               trigger: minisTextRef.current,
-              start: "top 80%", // Начинаем когда элемент на 80% высоты экрана
-              end: "bottom 30%",
+              start: "top 100%", // Начинаем когда элемент на 80% высоты экрана
+              end: "bottom 50%",
               scrub: true,
-              markers: true,
               invalidateOnRefresh: true, // Важно для пересчета при изменении размера
             },
             willChange: "transform, opacity",
@@ -76,17 +77,16 @@ export const Words: FC = () => {
         birzat bolmaly tapyndaa
       </h2>
 
-      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+      <div className="pos-x pos-y">
         {/* Контейнер для анимации */}
         <div
           ref={minisTextRef}
           className="minis-text z-50 rotate-[4deg] origin-center overflow-hidden"
         >
-          {/* Фиксированная ширина для стабильной анимации */}
           <div className="text-light-brown-block !text-dark-brown border-dark-brown border-[1vw] px-[4vw] py-[1vw] inline-block">
             Mini's
           </div>
-        </div>{" "}
+        </div>
       </div>
     </section>
   );

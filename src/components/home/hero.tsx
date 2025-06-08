@@ -9,13 +9,10 @@ export const Hero: FC = () => {
     () => {
       const tl = gsap.timeline();
 
-      tl.from(".light-text", {
-        autoAlpha: 0,
-        duration: 0.5,
-        willChange: "width",
-        transformOrigin: "center center",
+      tl.from(".dragee", {
         width: 0,
-        opacity: 0,
+        autoAlpha: 0,
+        willChange: "width opacity",
       });
 
       tl.from(".dark-text", {
@@ -33,13 +30,21 @@ export const Hero: FC = () => {
   return (
     <section ref={containerRef} className="h-screen relative">
       <div>
-        <h1 className="text-light-brown-block light-text rotate-[5deg] z-10 pos-x top-[13vw]">
-          Mini’s dragee
-        </h1>
+        <div className="pos-x top-[13vw]">
+          <div className="rotate-[5deg] dragee inline-block overflow-hidden origin-center">
+            <h1 className="text-light-brown-block inline-block light-text z-10 ">
+              Mini’s dragee
+            </h1>
+          </div>
+        </div>
 
-        <h1 className="text-dark-brown-block dark-text rotate-[2deg] pos-x top-[23vw]">
-          Unrepeatable taste
-        </h1>
+        <div className="pos-x top-[23vw]">
+          <div className="rotate-[2deg] inline-block origin-center">
+            <h1 className="text-dark-brown-block inline-block dark-text overflow-hidden">
+              Unrepeatable taste
+            </h1>
+          </div>
+        </div>
       </div>
 
       <div className="absolute left-0 top-[6vw] object-contain h-[15vw]">

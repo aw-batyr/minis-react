@@ -49,7 +49,6 @@ export const Products: FC = () => {
             start: "top 80%", // Начинаем когда элемент на 80% высоты экрана
             end: "bottom 30%",
             scrub: true,
-            markers: true,
             invalidateOnRefresh: true, // Важно для пересчета при изменении размера
           },
           willChange: "transform, opacity",

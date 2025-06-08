@@ -12,27 +12,19 @@ export const Slogan = () => {
     () => {
       const tl = gsap.timeline();
 
-      tl.fromTo(
-        ".mask",
-        {
-          autoAlpha: 0,
-          width: 0,
+      tl.from(".mask", {
+        width: 0, //Конечное состояние - нормальная ширина
+        autoAlpha: 0,
+        stagger: 0.1,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top 60%",
+          end: "bottom 30%",
+          scrub: 1,
         },
-        {
-          width: "auto", //Конечное состояние - нормальная ширина
-          autoAlpha: 1,
-          stagger: 0.1,
-          duration: 2,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: "top 60%",
-            end: "bottom 100%",
-            scrub: 1,
-          },
-          willChange: "transform opacity",
-        }
-      );
+        willChange: "transform opacity",
+      });
     },
     { scope: containerRef }
   );
