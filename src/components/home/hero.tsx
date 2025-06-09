@@ -1,6 +1,7 @@
 import { useGSAP } from "@gsap/react";
 import { useRef, type FC } from "react";
 import gsap from "gsap";
+import { useLoaderStore } from "../../store/use-loader";
 
 export const Hero: FC = () => {
   const containerRef = useRef(null);
@@ -10,38 +11,82 @@ export const Hero: FC = () => {
     if (el) parallaxItems.current.push(el);
   };
 
+  const loading = useLoaderStore((state) => state.loading);
+
   useGSAP(
     () => {
-      // Анимация появления
+      // Если загрузка еще идет - не запускаем анимации
+      if (loading) return;
+
       const tl = gsap.timeline();
       tl.from(".dragee", {
         width: 0,
         autoAlpha: 0,
         willChange: "width opacity",
+        duration: 0.8,
+        ease: "power2.out",
       });
-      tl.from(".dark-text", {
-        autoAlpha: 0,
-        duration: 0.5,
-        willChange: "width",
-        textAlign: "center",
-        width: 0,
-        opacity: 0,
-      });
+
+      tl.from(
+        ".dark-text",
+        {
+          autoAlpha: 0,
+          duration: 0.5,
+          willChange: "width",
+          width: 0,
+          ease: "power2.out",
+        },
+        "-=0.3"
+      );
+
+      const productsTl = gsap.timeline();
+
+      productsTl.from(
+        ".left-product",
+        {
+          y: "100%",
+          autoAlpha: 0,
+          duration: 0.5,
+          ease: "circ.out",
+          x: "-100%",
+        },
+        "+=0.2"
+      );
+
+      productsTl.from(
+        ".center-product",
+        {
+          y: "100%",
+          duration: 0.5,
+          ease: "circ.out",
+          autoAlpha: 0,
+        },
+        "-=0.3"
+      );
+
+      productsTl.from(
+        ".right-product",
+        {
+          y: "100%",
+          x: "100%",
+          ease: "circ.out",
+          duration: 0.5,
+          autoAlpha: 0,
+        },
+        "-=0.3"
+      );
 
       const parallaxEffect = (e: MouseEvent) => {
         const sensitivity = 0.03;
-        const maxOffset = 1000;
+        const maxOffset = 50;
 
-        // Вычисляем нормализованные координаты мыши (-1 до 1)
         const mouseX = (e.clientX / window.innerWidth) * 2 - 1;
         const mouseY = (e.clientY / window.innerHeight) * 2 - 1;
 
         parallaxItems.current.forEach((item) => {
-          // Вычисляем смещение с ограничением
           const offsetX = mouseX * maxOffset * sensitivity;
           const offsetY = mouseY * maxOffset * sensitivity;
 
-          // Применяем трансформацию
           gsap.to(item, {
             x: offsetX,
             y: offsetY,
@@ -58,7 +103,7 @@ export const Hero: FC = () => {
         window.removeEventListener("mousemove", parallaxEffect);
       };
     },
-    { scope: containerRef }
+    { scope: containerRef, dependencies: [loading] }
   );
 
   return (
@@ -120,18 +165,17 @@ export const Hero: FC = () => {
         className="absolute bottom-[6vw] left-[30vw] rotate-3 z-50 object-contain size-[18vw]"
       />
 
-      {/* PRODUCTS (без параллакса) */}
       <img
         src="/hero/product.png"
-        className="-bottom-[10vw] absolute left-0 w-[26vw] h-auto object-contain"
+        className="left-product -bottom-[10vw] absolute left-0 w-[26vw] h-auto object-contain"
       />
       <img
         src="/hero/brown-product.png"
-        className="-bottom-[10vw] absolute left-[30vw] w-[26vw] h-auto object-contain"
+        className="center-product -bottom-[10vw] absolute left-[30vw] w-[26vw] h-auto object-contain"
       />
       <img
         src="/hero/blue-product.png"
-        className="-bottom-[10vw] absolute right-0 w-[26vw] h-auto object-contain"
+        className="right-product -bottom-[10vw] absolute right-0 w-[26vw] h-auto object-contain"
       />
     </section>
   );

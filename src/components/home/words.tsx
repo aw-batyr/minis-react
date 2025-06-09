@@ -39,17 +39,19 @@ export const Words: FC = () => {
           minisTextRef.current,
           {
             width: 0,
+            x: 100,
             autoAlpha: 0,
-            transformOrigin: "center center",
+            placeSelf: "center left",
           },
           {
             width: "100%",
             autoAlpha: 1,
+            x: 0,
             duration: 1.5,
-            ease: "power2.out",
+            ease: "circ",
             scrollTrigger: {
               trigger: minisTextRef.current,
-              start: "top 100%", // Начинаем когда элемент на 80% высоты экрана
+              start: "top 90%", // Начинаем когда элемент на 80% высоты экрана
               end: "bottom 50%",
               scrub: true,
               invalidateOnRefresh: true, // Важно для пересчета при изменении размера
