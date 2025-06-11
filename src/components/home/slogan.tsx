@@ -19,9 +19,10 @@ export const Slogan = () => {
         ease: "power2.out",
         scrollTrigger: {
           trigger: containerRef.current,
-          start: "top 60%",
-          end: "bottom 30%",
+          start: "top 80%",
+          end: "bottom 50%",
           scrub: 1,
+          markers: true,
         },
         willChange: "transform opacity",
       });
@@ -51,14 +52,14 @@ export const Slogan = () => {
       </div>
 
       {/* Заголовок 3 */}
-      <div className="absolute bottom-[12.5vw] rotate-2 z-30">
+      <div className="absolute bottom-[14vw] rotate-2 z-30">
         <div className="mask inline-block overflow-hidden origin-center">
           <h2 className="!bg-[#7F3B2D] !px-[7vw]">slogan yaljak soz</h2>
         </div>
       </div>
 
       {/* Заголовок 4 */}
-      <div className="absolute bottom-[4vw] -rotate-[5deg] mt-[0.5vw]">
+      <div className="absolute bottom-[5.5vw] -rotate-[5deg] mt-[0.5vw]">
         <div className="mask inline-block overflow-hidden origin-center">
           <h2 className="!bg-[#FED775] !text-[#2E2D2F] !px-[2vw]">
             gerek bolar

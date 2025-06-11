@@ -1,18 +1,29 @@
 import { Outlet } from "react-router-dom";
 import { Footer, Header, Loader } from "./components/layout";
-import ReactLenis from "lenis/react";
+import ReactLenis, { useLenis } from "lenis/react";
+import { useEffect } from "react";
 
 function App() {
+  const lenis = useLenis();
+
   return (
-    <ReactLenis root>
-      <Loader />
-      <Header />
+    <ReactLenis
+      root
+      options={{
+        smoothWheel: true,
+        lerp: 0.08,
+      }}
+    >
+      <div>
+        <Loader />
+        <Header />
 
-      <main className="flex-auto overflow-hidden">
-        <Outlet />
-      </main>
+        <main className="flex-auto overflow-hidden">
+          <Outlet />
+        </main>
 
-      <Footer />
+        <Footer />
+      </div>
     </ReactLenis>
   );
 }

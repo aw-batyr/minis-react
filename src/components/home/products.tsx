@@ -30,9 +30,8 @@ export const Products: FC = () => {
           scrollTrigger: {
             trigger: horizontalRef.current,
             start: "top 90%",
-            end: "bottom 60%",
+            end: "bottom 50%",
             scrub: 1,
-            markers: false,
           },
         });
       });
@@ -82,10 +81,10 @@ export const Products: FC = () => {
   );
 
   return (
-    <section ref={containerRef} className="relative h-[110vh] overflow-hidden ">
+    <section ref={containerRef} className="relative  overflow-hidden ">
       <div
         ref={horizontalRef}
-        className="horizontal flex gap-[10vw] items-center w-[200vw]  will-change-transform"
+        className="horizontal flex gap-[10vw] items-center px-[5vw] w-[200vw]  will-change-transform"
       >
         <h2
           ref={textRef}
@@ -110,7 +109,7 @@ export const Products: FC = () => {
         ))}
       </div>
 
-      <div className="flex justify-center px-[5vw]">
+      <div className="flex justify-center px-[5vw] py-[5vw]">
         <button className="bottom-[5vw] left-1/2 transform -translate-x-1/2 btn">
           See All
         </button>

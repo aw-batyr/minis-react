@@ -1,95 +1,169 @@
 import { useGSAP } from "@gsap/react";
 import { useRef, type FC } from "react";
 import gsap from "gsap";
-import { useLoaderStore } from "../../store/use-loader";
+
+// Тип для направления анимации
+type AnimationDirection = "top" | "bottom" | "left" | "right";
+
+// Интерфейс для декоративных элементов
+interface AnimatedItem {
+  src: string;
+  className: string;
+  direction: AnimationDirection;
+  distance: number;
+  delay: number;
+  parallax?: boolean;
+}
 
 export const Hero: FC = () => {
-  const containerRef = useRef(null);
-  const parallaxItems = useRef<HTMLImageElement[]>([]);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const decorItemsRef = useRef<(HTMLImageElement | null)[]>([]);
+  const animatedItemsRef = useRef<(HTMLImageElement | null)[]>([]);
 
-  const addToParallax = (el: HTMLImageElement | null) => {
-    if (el) parallaxItems.current.push(el);
-  };
+  // Конфигурация декоративных элементов
+  const animatedItems: AnimatedItem[] = [
+    // Декорации
+    {
+      src: "/hero/decor.png",
+      className: "absolute left-0 top-[6vw] h-[15vw] object-contain",
+      direction: "left",
+      distance: 300,
+      delay: 0.2,
+      parallax: true,
+    },
+    {
+      src: "/hero/decor-2.png",
+      className:
+        "absolute top-[7vw] left-[33vw] z-50 size-[4vw] object-contain",
+      direction: "top",
+      distance: 200,
+      delay: 0.3,
+      parallax: true,
+    },
+    {
+      src: "/hero/decor-3.png",
+      className:
+        "absolute -top-[1vw] right-[18vw] z-50 size-[20vw] -rotate-[25deg] object-contain",
+      direction: "right",
+      distance: 400,
+      delay: 0.4,
+      parallax: true,
+    },
+    {
+      src: "/hero/decor-4.png",
+      className:
+        "absolute top-[19vw] right-[22vw] z-50 size-[3.9vw] -rotate-[25deg] object-contain",
+      direction: "right",
+      distance: 250,
+      delay: 0.5,
+      parallax: true,
+    },
+    {
+      src: "/hero/decor-5.png",
+      className:
+        "absolute top-[10vw] right-0 z-50 size-[18vw] rotate-3 object-contain",
+      direction: "right",
+      distance: 500,
+      delay: 0.6,
+      parallax: true,
+    },
+    {
+      src: "/hero/decor-6.png",
+      className:
+        "absolute bottom-[6vw] left-[30vw] z-50 size-[18vw] rotate-3 object-contain",
+      direction: "bottom",
+      distance: 350,
+      delay: 0.7,
+      parallax: true,
+    },
 
-  const loading = useLoaderStore((state) => state.loading);
+    // Продукты
+    {
+      src: "/hero/product.png",
+      className:
+        "left-product -bottom-[10vw] absolute left-0 w-[26vw] h-auto object-contain",
+      direction: "bottom",
+      distance: 400,
+      delay: 1.0,
+      parallax: false,
+    },
+    {
+      src: "/hero/brown-product.png",
+      className:
+        "center-product -bottom-[10vw] absolute left-[30vw] w-[26vw] h-auto object-contain",
+      direction: "bottom",
+      distance: 400,
+      delay: 1.2,
+      parallax: false,
+    },
+    {
+      src: "/hero/blue-product.png",
+      className:
+        "right-product -bottom-[10vw] absolute right-0 w-[26vw] h-auto object-contain",
+      direction: "bottom",
+      distance: 400,
+      delay: 1.4,
+      parallax: false,
+    },
+  ];
 
   useGSAP(
     () => {
-      // Если загрузка еще идет - не запускаем анимации
-      if (loading) return;
+      const master = gsap.timeline({ delay: 2.2 });
 
-      const tl = gsap.timeline();
-      tl.from(".dragee", {
-        width: 0,
-        autoAlpha: 0,
-        willChange: "width opacity",
-        duration: 0.8,
-        ease: "power2.out",
-      });
-
-      tl.from(
-        ".dark-text",
-        {
-          autoAlpha: 0,
-          duration: 0.5,
-          willChange: "width",
-          width: 0,
-          ease: "power2.out",
-        },
-        "-=0.3"
+      master.fromTo(
+        "#dragee",
+        { width: 0, opacity: 0 },
+        { width: "auto", opacity: 1, duration: 0.5 }
+      );
+      master.fromTo(
+        "#taste",
+        { width: 0, opacity: 0 },
+        { width: "auto", opacity: 1, duration: 0.6 }
       );
 
-      const productsTl = gsap.timeline();
+      animatedItems.forEach((item, index) => {
+        const element = animatedItemsRef.current[index];
+        if (!element) return;
 
-      productsTl.from(
-        ".left-product",
-        {
-          y: "100%",
-          autoAlpha: 0,
-          duration: 0.5,
-          ease: "circ.out",
-          x: "-100%",
-        },
-        "+=0.2"
-      );
+        // Начальные позиции за пределами экрана
+        const startPositions: Record<AnimationDirection, GSAPTweenVars> = {
+          top: { y: -item.distance, opacity: 0 },
+          bottom: { y: item.distance, opacity: 0 },
+          left: { x: -item.distance, opacity: 0 },
+          right: { x: item.distance, opacity: 0 },
+        };
 
-      productsTl.from(
-        ".center-product",
-        {
-          y: "100%",
-          duration: 0.5,
-          ease: "circ.out",
-          autoAlpha: 0,
-        },
-        "-=0.3"
-      );
+        // Устанавливаем начальное положение
+        gsap.set(element, startPositions[item.direction]);
 
-      productsTl.from(
-        ".right-product",
-        {
-          y: "100%",
-          x: "100%",
-          ease: "circ.out",
-          duration: 0.5,
-          autoAlpha: 0,
-        },
-        "-=0.3"
-      );
-
+        // Анимация вылета на финальную позицию
+        master.to(
+          element,
+          {
+            x: 0,
+            y: 0,
+            opacity: 1,
+            duration: 0.8,
+            ease: "back.out(1.7)",
+            overwrite: "auto",
+          },
+          "<"
+        );
+      }); // Параллакс-эффект для декораций
       const parallaxEffect = (e: MouseEvent) => {
-        const sensitivity = 0.03;
+        const sensitivity = 0.1;
         const maxOffset = 50;
 
         const mouseX = (e.clientX / window.innerWidth) * 2 - 1;
         const mouseY = (e.clientY / window.innerHeight) * 2 - 1;
 
-        parallaxItems.current.forEach((item) => {
-          const offsetX = mouseX * maxOffset * sensitivity;
-          const offsetY = mouseY * maxOffset * sensitivity;
+        decorItemsRef.current.forEach((item) => {
+          if (!item) return;
 
           gsap.to(item, {
-            x: offsetX,
-            y: offsetY,
+            x: mouseX * maxOffset * sensitivity,
+            y: mouseY * maxOffset * sensitivity,
             duration: 0.8,
             ease: "power3.out",
             overwrite: "auto",
@@ -99,84 +173,56 @@ export const Hero: FC = () => {
 
       window.addEventListener("mousemove", parallaxEffect);
 
-      return () => {
-        window.removeEventListener("mousemove", parallaxEffect);
-      };
+      return () => window.removeEventListener("mousemove", parallaxEffect);
     },
-    { scope: containerRef, dependencies: [loading] }
+    { scope: containerRef }
   );
 
+  // Вспомогательная функция для добавления ref
+  const addToAnimatedItemsRefs = (
+    el: HTMLImageElement | null,
+    index: number
+  ) => {
+    animatedItemsRef.current[index] = el;
+  };
+
   return (
-    <section ref={containerRef} className="h-screen relative">
-      <div>
-        <div className="pos-x top-[13vw]">
-          <div className="rotate-[5deg] dragee inline-block overflow-hidden origin-center">
-            <h1 className="text-light-brown-block inline-block light-text z-10 ">
-              Mini’s dragee
+    <section ref={containerRef} className="relative h-screen overflow-hidden">
+      {/* Текстовый блок */}
+      <div className="relative z-10">
+        <div className="absolute left-1/2 top-[13vw] z-10 -translate-x-1/2">
+          <div
+            id="dragee"
+            className="overflow-hidden rotate-[5deg] will-change-transform"
+          >
+            <h1 className="inline-block ligth-text text-light-brown-block z-20 overflow-hidden">
+              Mini's dragee
             </h1>
           </div>
         </div>
 
-        <div className="pos-x top-[23vw]">
-          <div className="rotate-[2deg] inline-block origin-center">
-            <h1 className="text-dark-brown-block inline-block dark-text overflow-hidden">
+        <div className="absolute left-1/2 top-[23vw] -translate-x-1/2">
+          <div
+            id="taste"
+            className="overflow-hidden rotate-[2deg] will-change-transform"
+          >
+            <h1 className="inline-block dark-text text-dark-brown-block overflow-hidden">
               Unrepeatable taste
             </h1>
           </div>
         </div>
       </div>
-
-      {/* Декоры с параллакс-эффектом */}
-      <div className="absolute left-0 top-[6vw] object-contain h-[15vw]">
+      {/* Декоративные элементы */}
+      {/* Все анимируемые элементы (декорации + продукты) */}
+      {animatedItems.map((item, index) => (
         <img
-          ref={addToParallax}
-          src="/hero/decor.png"
-          className="size-full object-contain"
+          key={`${item.src}-${index}`}
+          ref={(el) => addToAnimatedItemsRefs(el, index)}
+          src={item.src}
+          className={item.className}
+          alt={`Animated element ${index + 1}`}
         />
-      </div>
-
-      <img
-        ref={addToParallax}
-        src="/hero/decor-2.png"
-        className="absolute top-[7vw] left-[33vw] z-50 object-contain size-[4vw]"
-      />
-
-      <img
-        ref={addToParallax}
-        src="/hero/decor-3.png"
-        className="absolute -top-[1vw] right-[18vw] -rotate-[25deg] z-50 object-contain size-[20vw]"
-      />
-
-      <img
-        ref={addToParallax}
-        src="/hero/decor-4.png"
-        className="absolute top-[19vw] right-[22vw] -rotate-[25deg] z-50 object-contain size-[3.9vw]"
-      />
-
-      <img
-        ref={addToParallax}
-        src="/hero/decor-5.png"
-        className="absolute top-[10vw] right-0 rotate-3 z-50 object-contain size-[18vw]"
-      />
-
-      <img
-        ref={addToParallax}
-        src="/hero/decor-6.png"
-        className="absolute bottom-[6vw] left-[30vw] rotate-3 z-50 object-contain size-[18vw]"
-      />
-
-      <img
-        src="/hero/product.png"
-        className="left-product -bottom-[10vw] absolute left-0 w-[26vw] h-auto object-contain"
-      />
-      <img
-        src="/hero/brown-product.png"
-        className="center-product -bottom-[10vw] absolute left-[30vw] w-[26vw] h-auto object-contain"
-      />
-      <img
-        src="/hero/blue-product.png"
-        className="right-product -bottom-[10vw] absolute right-0 w-[26vw] h-auto object-contain"
-      />
+      ))}{" "}
     </section>
   );
 };
