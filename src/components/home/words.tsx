@@ -69,7 +69,7 @@ export const Words: FC = () => {
       ref={containerRef}
       className="bg-dark-brown relative section py-[8vw]"
     >
-      <h2 className="text-white words text-[10vw] uppercase leading-[105%] track text-center">
+      <h2 className="text-white words md:text-[10vw] text-[15vw] uppercase leading-[105%] track text-center">
         Shu yere gowja
         <br />
         Moshny gowja soz

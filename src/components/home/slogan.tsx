@@ -22,7 +22,6 @@ export const Slogan = () => {
           start: "top 80%",
           end: "bottom 50%",
           scrub: 1,
-          markers: true,
         },
         willChange: "transform opacity",
       });
@@ -33,7 +32,7 @@ export const Slogan = () => {
   return (
     <section
       ref={containerRef}
-      className="slogan-section relative h-screen bg-black-bg uppercase text-[6vw] flex flex-col items-center -tracking-[0.4vw]"
+      className="slogan-section relative md:h-screen h-[60vh] bg-black-bg uppercase md:text-[6vw] text-[10vw] flex flex-col items-center -tracking-[0.4vw]"
     >
       {/* Заголовок 1 */}
       <div className="absolute top-[10vw] rotate-6 z-10">

@@ -81,7 +81,7 @@ export const Hero: FC = () => {
     {
       src: "/hero/product.png",
       className:
-        "left-product -bottom-[10vw] absolute left-0 w-[26vw] h-auto object-contain",
+        "left-product md:-bottom-[4vw] md:!rotate-[20deg] -rotate-[50deg] -bottom-[5vw] absolute md:-left-[5vw] -left-[15vw] md:w-[26vw] w-[60vw] h-auto object-contain",
       direction: "bottom",
       distance: 400,
       delay: 1.0,
@@ -90,7 +90,7 @@ export const Hero: FC = () => {
     {
       src: "/hero/brown-product.png",
       className:
-        "center-product -bottom-[10vw] absolute left-[30vw] w-[26vw] h-auto object-contain",
+        "center-product md:-bottom-[5vw] bottom-[45vw] md:!-rotate-[15deg] rotate-0 absolute md:left-[30vw] left-[17vw] md:w-[26vw] w-[60vw] h-auto object-contain",
       direction: "bottom",
       distance: 400,
       delay: 1.2,
@@ -99,7 +99,7 @@ export const Hero: FC = () => {
     {
       src: "/hero/blue-product.png",
       className:
-        "right-product -bottom-[10vw] absolute right-0 w-[26vw] h-auto object-contain",
+        "right-product md:-bottom-[3vw] -bottom-[5vw] absolute md:-right-[5vw] !rotate-[30deg]  md:!-rotate-[10deg] -right-[10vw] md:w-[26vw] w-[60vw] h-auto object-contain",
       direction: "bottom",
       distance: 400,
       delay: 1.4,
@@ -109,17 +109,17 @@ export const Hero: FC = () => {
 
   useGSAP(
     () => {
-      const master = gsap.timeline({ delay: 2.2 });
+      const master = gsap.timeline({ delay: 3 });
 
       master.fromTo(
         "#dragee",
         { width: 0, opacity: 0 },
-        { width: "auto", opacity: 1, duration: 0.5 }
+        { width: "auto", opacity: 1, duration: 0.4 }
       );
       master.fromTo(
         "#taste",
         { width: 0, opacity: 0 },
-        { width: "auto", opacity: 1, duration: 0.6 }
+        { width: "auto", opacity: 1, duration: 0.4 }
       );
 
       animatedItems.forEach((item, index) => {
@@ -134,10 +134,8 @@ export const Hero: FC = () => {
           right: { x: item.distance, opacity: 0 },
         };
 
-        // Устанавливаем начальное положение
         gsap.set(element, startPositions[item.direction]);
 
-        // Анимация вылета на финальную позицию
         master.to(
           element,
           {
@@ -150,7 +148,7 @@ export const Hero: FC = () => {
           },
           "<"
         );
-      }); // Параллакс-эффект для декораций
+      });
       const parallaxEffect = (e: MouseEvent) => {
         const sensitivity = 0.1;
         const maxOffset = 50;
@@ -159,8 +157,6 @@ export const Hero: FC = () => {
         const mouseY = (e.clientY / window.innerHeight) * 2 - 1;
 
         decorItemsRef.current.forEach((item) => {
-          if (!item) return;
-
           gsap.to(item, {
             x: mouseX * maxOffset * sensitivity,
             y: mouseY * maxOffset * sensitivity,
@@ -187,10 +183,13 @@ export const Hero: FC = () => {
   };
 
   return (
-    <section ref={containerRef} className="relative h-screen overflow-hidden">
+    <section
+      ref={containerRef}
+      className="relative md:h-screen h-[70vh] overflow-hidden"
+    >
       {/* Текстовый блок */}
       <div className="relative z-10">
-        <div className="absolute left-1/2 top-[13vw] z-10 -translate-x-1/2">
+        <div className="absolute left-1/2 md:top-[13vw] top-[32vw] z-10 -translate-x-1/2">
           <div
             id="dragee"
             className="overflow-hidden rotate-[5deg] will-change-transform"
@@ -201,7 +200,7 @@ export const Hero: FC = () => {
           </div>
         </div>
 
-        <div className="absolute left-1/2 top-[23vw] -translate-x-1/2">
+        <div className="absolute left-1/2 md:top-[23vw] top-[45vw] -translate-x-1/2">
           <div
             id="taste"
             className="overflow-hidden rotate-[2deg] will-change-transform"
@@ -212,8 +211,6 @@ export const Hero: FC = () => {
           </div>
         </div>
       </div>
-      {/* Декоративные элементы */}
-      {/* Все анимируемые элементы (декорации + продукты) */}
       {animatedItems.map((item, index) => (
         <img
           key={`${item.src}-${index}`}

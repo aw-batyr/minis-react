@@ -100,9 +100,13 @@ export const Loader = () => {
         "loader fixed margin-0 overflow-hidden duration-500 flex flex-col items-center justify-center h-screen z-[100] transition-all bg-dark-brown w-full top-0 left-0 right-0 bottom-0"
       )}
     >
-      <img src="/logo.svg" alt="Logo" className="mb-8 size-[20vw] md:w-64" />
+      <img
+        src="/logo.svg"
+        alt="Logo"
+        className="mb-8 md:size-[15vw] size-[30vw]"
+      />
 
-      <div className="w-[15vw] h-[0.5vw] rounded-full overflow-hidden">
+      <div className="md:w-[15vw] w-[40vw] md:h-[0.5vw] h-[1.5vw] rounded-full overflow-hidden">
         <div
           ref={progressBarRef}
           className="h-full bg-light-brown-text rounded-full"
@@ -110,7 +114,7 @@ export const Loader = () => {
         />
       </div>
 
-      <div className="mt-4 text-ligbg-light-brown-text text-[2vw]">
+      <div className="mt-4 text-ligbg-light-brown-text text-[5vw] md:text-[2vw]">
         {progress}%
       </div>
     </div>

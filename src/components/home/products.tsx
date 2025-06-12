@@ -65,12 +65,6 @@ export const Products: FC = () => {
             scrub: 1,
             pin: true,
             anticipatePin: 1,
-            snap: {
-              snapTo: [0, 1],
-              duration: { min: 0.2, max: 0.5 },
-              delay: 0.1,
-              ease: "power1.inOut",
-            },
             onEnter: () => gsap.set(horizontalRef.current, { x: 0 }),
             onLeaveBack: () => gsap.set(horizontalRef.current, { x: 0 }),
           },
@@ -81,21 +75,21 @@ export const Products: FC = () => {
   );
 
   return (
-    <section ref={containerRef} className="relative  overflow-hidden ">
+    <section ref={containerRef} className="relative overflow-hidden">
       <div
         ref={horizontalRef}
-        className="horizontal flex gap-[10vw] items-center px-[5vw] w-[200vw]  will-change-transform"
+        className="md:horizontal flex flex-col md:flex-row md:gap-[10vw] items-center px-[5vw] md:w-[200vw] will-change-transform"
       >
         <h2
           ref={textRef}
-          className="whitespace-nowrap text-center text-[7vw] uppercase text-[#553124] track"
+          className="whitespace-nowrap text-center md:text-[7vw] text-[15vw] uppercase text-[#553124] track"
         >
           Bizde 6
           <br />
           GORNUSH BAR
         </h2>
 
-        <div className="minis-text inline-block text-light-brown-block overflow-hidden leading-none !pb-[1vw] border-[0.4vw] z-50 text-light-brown-block -rotate-[6deg] !px-[3vw] !text-[6vw] absolute top-[17vw] left-[12vw]">
+        <div className="minis-text inline-block text-light-brown-block md:overflow-hidden leading-none !pb-[1vw] border-[0.4vw] z-50 text-light-brown-block -rotate-[6deg] !px-[3vw] md:!text-[6vw] absolute top-[17vw] left-[40vw] md:left-[12vw]">
           Mini’s
         </div>
 
@@ -104,15 +98,13 @@ export const Products: FC = () => {
             key={i}
             src={`/products/product-${1}.png`}
             alt=""
-            className="w-auto h-[40vw] object-cover flex-shrink-0"
+            className="w-auto h-[70vw] object-cover flex-shrink-0"
           />
         ))}
       </div>
 
-      <div className="flex justify-center px-[5vw] py-[5vw]">
-        <button className="bottom-[5vw] left-1/2 transform -translate-x-1/2 btn">
-          See All
-        </button>
+      <div className="flex justify-center w-full mx-auto py-[5vw]">
+        <button className="btn">See All</button>
       </div>
     </section>
   );
