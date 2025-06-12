@@ -98,7 +98,7 @@ export const Products: FC = () => {
             key={i}
             src={`/products/product-${1}.png`}
             alt=""
-            className="w-auto h-[70vw] object-cover flex-shrink-0"
+            className="w-auto h-[70vw] md:h-[40vw] object-cover flex-shrink-0"
           />
         ))}
       </div>

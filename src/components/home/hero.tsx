@@ -81,7 +81,7 @@ export const Hero: FC = () => {
     {
       src: "/hero/product.png",
       className:
-        "left-product md:-bottom-[4vw] md:!rotate-[20deg] -rotate-[50deg] -bottom-[5vw] absolute md:-left-[5vw] -left-[15vw] md:w-[26vw] w-[60vw] h-auto object-contain",
+        "left-product md:-bottom-[4vw] md:!rotate-[20deg] -rotate-[50deg] -bottom-[5vw] absolute md:-left-[5vw] -left-[15vw] md:!w-[26vw] !w-[60vw] h-auto object-contain",
       direction: "bottom",
       distance: 400,
       delay: 1.0,
@@ -90,7 +90,7 @@ export const Hero: FC = () => {
     {
       src: "/hero/brown-product.png",
       className:
-        "center-product md:-bottom-[5vw] bottom-[45vw] md:!-rotate-[15deg] rotate-0 absolute md:left-[30vw] left-[17vw] md:w-[26vw] w-[60vw] h-auto object-contain",
+        "center-product md:-bottom-[5vw] bottom-[45vw] md:!-rotate-[15deg] rotate-0 absolute md:left-[30vw] left-[17vw] md:!w-[26vw] !w-[60vw] h-auto object-contain",
       direction: "bottom",
       distance: 400,
       delay: 1.2,
@@ -99,7 +99,7 @@ export const Hero: FC = () => {
     {
       src: "/hero/blue-product.png",
       className:
-        "right-product md:-bottom-[3vw] -bottom-[5vw] absolute md:-right-[5vw] !rotate-[30deg]  md:!-rotate-[10deg] -right-[10vw] md:w-[26vw] w-[60vw] h-auto object-contain",
+        "right-product md:-bottom-[3vw] -bottom-[5vw] absolute md:-right-[5vw] !rotate-[30deg]  md:!-rotate-[10deg] -right-[10vw] md:!w-[26vw] !w-[60vw] h-auto object-contain",
       direction: "bottom",
       distance: 400,
       delay: 1.4,
