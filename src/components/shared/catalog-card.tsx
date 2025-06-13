@@ -17,18 +17,18 @@ export const CatalogCard: FC<Props> = ({
   return (
     <article
       className={clsx(
-        "bg-[#F2D5C0] overflow-hidden w-[22vw] h-[14vw] outline-[0.3vw] outline-[#FAEADE] rounded-[1.5vw]",
+        "bg-[#F2D5C0] overflow-hidden w-[80vw] md:w-[22vw] md:h-[14vw] h-[50vw] outline-[0.3vw] outline-[#FAEADE] rounded-[1.5vw]",
         className
       )}
     >
       <img
         src={imgUrl}
         alt={title}
-        className={clsx("absolute right-10 top-10", imgPos)}
+        className={clsx("absolute right-10 top-10 object-contain", imgPos)}
       />
       <h3
         dangerouslySetInnerHTML={{ __html: title }}
-        className="text-[2.2vw] uppercase absolute text-left leading-[100%] -tracking-[.1vw] left-[1.5vw] bottom-[1.5vw] text-[#523122]"
+        className="md:text-[2.2vw] text-[7vw] uppercase absolute text-left leading-[100%] -tracking-[0.1vw] md:left-[1.5vw] left-[3vw] bottom-[3vw] md:bottom-[1.5vw]  text-[#523122]"
       ></h3>
     </article>
   );

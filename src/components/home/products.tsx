@@ -3,6 +3,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
 import { useRef, type FC } from "react";
+import { useMediaQuery } from "usehooks-ts";
 
 gsap.registerPlugin(SplitText, ScrollTrigger);
 
@@ -10,6 +11,8 @@ export const Products: FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLHeadingElement>(null);
   const horizontalRef = useRef<HTMLDivElement>(null);
+
+  const md = useMediaQuery("(min-width: 768px)");
 
   useGSAP(
     () => {
@@ -28,7 +31,7 @@ export const Products: FC = () => {
           stagger: 0.1,
           duration: 0.4,
           scrollTrigger: {
-            trigger: horizontalRef.current,
+            trigger: md ? horizontalRef.current : textRef.current,
             start: "top 90%",
             end: "bottom 50%",
             scrub: 1,
@@ -77,8 +80,9 @@ export const Products: FC = () => {
   return (
     <section ref={containerRef} className="relative overflow-hidden">
       <div
-        ref={horizontalRef}
-        className="md:horizontal flex flex-col md:flex-row md:gap-[10vw] items-center px-[5vw] md:w-[200vw] will-change-transform"
+        id="mobile-products"
+        ref={md ? horizontalRef : null}
+        className="md:horizontal flex flex-col md:flex-row gap-[10vw] items-center px-[5vw] md:w-[200vw] will-change-transform"
       >
         <h2
           ref={textRef}
@@ -89,7 +93,7 @@ export const Products: FC = () => {
           GORNUSH BAR
         </h2>
 
-        <div className="minis-text inline-block text-light-brown-block md:overflow-hidden leading-none !pb-[1vw] border-[0.4vw] z-50 text-light-brown-block -rotate-[6deg] !px-[3vw] md:!text-[6vw] absolute top-[17vw] left-[40vw] md:left-[12vw]">
+        <div className="minis-text inline-block text-light-brown-block md:overflow-hidden leading-none !pb-[1vw] border-[0.4vw] z-50 text-light-brown-block -rotate-[6deg] !px-[3vw] md:!text-[6vw] absolute top-[17vw] left-[33vw] md:left-[12vw]">
           Mini’s
         </div>
 
@@ -98,12 +102,12 @@ export const Products: FC = () => {
             key={i}
             src={`/products/product-${1}.png`}
             alt=""
-            className="w-auto h-[70vw] md:h-[40vw] object-cover flex-shrink-0"
+            className="w-auto h-[80vw] md:h-[40vw] object-cover flex-shrink-0"
           />
         ))}
       </div>
 
-      <div className="flex justify-center w-full mx-auto py-[5vw]">
+      <div className="flex justify-center w-full mx-auto md:py-[5vw] py-[15vw]">
         <button className="btn">See All</button>
       </div>
     </section>

@@ -7,20 +7,22 @@ const cards = [
   {
     title: "mini's <br /> umbrella",
     imgUrl: "/catalog/1.png",
-    className: "absolute left-0 -rotate-[10deg] top-[10vw]",
-    imgPos: "absolute top-[0.5vw] right-[3vw]",
+    className: "md:absolute left-0 !rotate-0 md:!-rotate-[10deg] top-[10vw]",
+    imgPos:
+      "absolute md:top-[0.5vw] !-top-[2vw] right-[3vw] md:h-auto h-[55vw]",
   },
   {
     title: "mini's dragee",
     imgUrl: "/catalog/2.png",
-    className: "absolute pos-x bottom-[2vw] rotate-[4deg]",
-    imgPos: "pos-x top-[1vw]",
+    className: "md:absolute md:pos-x !!rotate-0 bottom-[2vw] md:!rotate-[4deg]",
+    imgPos: "pos-x md:top-[1vw] top-[4vw] md:h-auto h-[35vw]",
   },
   {
     title: "mini's <br /> cornetto",
     imgUrl: "/catalog/3.png",
-    className: "absolute right-0 top-[8vw]",
-    imgPos: "absolute top-[1.5vw] right-[1vw]",
+    className: "md:absolute right-0 !rotate-0 top-[8vw]",
+    imgPos:
+      "absolute md:top-[1.5vw] top-[5vw] md:right-[1vw] md:h-auto h-[35vw]",
   },
 ];
 
@@ -33,9 +35,11 @@ export const Catalog = () => {
       mask: "lines",
     });
 
-    const { lines } = new SplitText("#catalog-text", {
-      type: "chars, lines",
-    });
+    // const { lines } = new SplitText("#catalog-text", {
+    //   type: "chars, lines",
+    //   smartWrap: true,
+    //   autoSplit: true,
+    // });
 
     gsap.from(chars, {
       y: 200,
@@ -48,21 +52,20 @@ export const Catalog = () => {
       stagger: 0.05,
     });
 
-    gsap.from(lines, {
-      autoAlpha: 0,
-      y: 100,
-      duration: 0.3,
-      scrollTrigger: {
-        trigger: "#catalog",
-        start: "top 80%",
-        end: "bottom 20%",
-        markers: true,
-      },
-      stagger: {
-        each: 0.5,
-        amount: 0.5,
-      },
-    });
+    // gsap.from(lines, {
+    //   autoAlpha: 0,
+    //   y: 100,
+    //   duration: 0.3,
+    //   scrollTrigger: {
+    //     trigger: "#catalog",
+    //     start: "top 80%",
+    //     end: "bottom 20%",
+    //   },
+    //   stagger: {
+    //     each: 0.5,
+    //     amount: 0.5,
+    //   },
+    // });
 
     gsap.from(".catalog-card", {
       scrollTrigger: {
@@ -86,17 +89,17 @@ export const Catalog = () => {
   return (
     <section
       id="catalog"
-      className="h-screen w-full flex flex-col items-center justify-center text-center"
+      className="w-full flex flex-col items-center py-[15vw] md:justify-center text-center"
     >
       <h3
         id="catalog-title"
-        className="text-[#865720] font-bold text-[2vw] mb-[1.25vw]"
+        className="text-[#865720] font-bold text-[10vw] md:text-[2vw] md:mb-[1.25vw] mb-[5vw]"
       >
         Our Story Begins
       </h3>
       <p
         id="catalog-text"
-        className="text-[#523122] proxima will-change-transform w-[46vw] text-[0.93vw] leading-[100%]"
+        className="text-[#523122] proxima will-change-transform md:w-[46vw] md:mb-0 mb-[10vw] w-[80vw] md:text-[0.93vw] text-[3vw] md:leading-[100%] leading-[125%]"
       >
         Minis was born from a simple yet powerful idea: to create miniature
         delights that bring joy. Founded by a team of food enthusiasts, we've
@@ -105,7 +108,7 @@ export const Catalog = () => {
         vision of redefining snacking.
       </p>
 
-      <div className="relative flex items-center justify-center w-[58vw] h-[20vw]">
+      <div className="relative flex flex-col md:flex-row items-center justify-center w-[58vw] gap-[10vw] md:h-[20vw] h-full">
         {cards.map((item, i) => (
           <CatalogCard
             {...item}

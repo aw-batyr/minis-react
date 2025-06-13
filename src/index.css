@@ -140,7 +140,7 @@ body {
   }
 
   .text-16 {
-    @apply text-[0.83vw] leading-[110%];
+    @apply md:text-[0.83vw] text-[2vw] leading-[110%];
   }
 
   .words h1 {
@@ -152,7 +152,11 @@ body {
   }
 
   .line2 {
-    @apply mb-[5vw];
+    @apply md:mb-[5vw];
+  }
+
+  .line4 {
+    @apply md:mb-0 mb-[15vw];
   }
 
   .text-light-brown-block {

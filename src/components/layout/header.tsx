@@ -30,11 +30,15 @@ export const Header: FC<Props> = ({ className }) => {
         className
       )}
     >
-      <img src="/logo.svg" alt="logo" className="size-[5vw] cursor-pointer" />
+      <img
+        src="/logo.svg"
+        alt="logo"
+        className="md:size-[5vw] size-[20vw] cursor-pointer"
+      />
 
       <Burger />
 
-      <div />
+      <div className="md:block hidden" />
     </header>
   );
 };
