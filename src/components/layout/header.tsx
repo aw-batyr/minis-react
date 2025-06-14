@@ -3,6 +3,7 @@ import type { FC } from "react";
 import { Burger } from "../shared";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+import { Link } from "react-router-dom";
 
 interface Props {
   className?: string;
@@ -30,11 +31,13 @@ export const Header: FC<Props> = ({ className }) => {
         className
       )}
     >
-      <img
-        src="/logo.svg"
-        alt="logo"
-        className="md:size-[5vw] size-[20vw] cursor-pointer"
-      />
+      <Link to="/">
+        <img
+          src="/logo.svg"
+          alt="logo"
+          className="md:size-[5vw] size-[20vw] cursor-pointer"
+        />
+      </Link>
 
       <Burger />
 

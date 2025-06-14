@@ -3,6 +3,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
 import { useRef, type FC } from "react";
+import { Link } from "react-router-dom";
 import { useMediaQuery } from "usehooks-ts";
 
 gsap.registerPlugin(SplitText, ScrollTrigger);
@@ -27,7 +28,7 @@ export const Products: FC = () => {
         });
 
         gsap.from(chars, {
-          y: 100,
+          y: 300,
           stagger: 0.1,
           duration: 0.4,
           scrollTrigger: {
@@ -98,12 +99,14 @@ export const Products: FC = () => {
         </div>
 
         {[...Array(3)].map((_, i) => (
-          <img
-            key={i}
-            src={`/products/product-${1}.png`}
-            alt=""
-            className="w-auto h-[80vw] md:h-[40vw] object-cover flex-shrink-0"
-          />
+          <Link to={`/product/${i + 1}`}>
+            <img
+              key={i}
+              src={`/products/product-${1}.png`}
+              alt=""
+              className="w-auto h-[80vw] md:h-[40vw] object-cover flex-shrink-0"
+            />
+          </Link>
         ))}
       </div>
 
