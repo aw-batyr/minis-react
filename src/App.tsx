@@ -1,11 +1,13 @@
 import { Outlet } from "react-router-dom";
 import { Footer, Header, Loader } from "./components/layout";
-import ReactLenis from "lenis/react";
+import ReactLenis, { useLenis } from "lenis/react";
 import { useEffect } from "react";
 
 function App() {
+  const lenis = useLenis();
+
   useEffect(() => {
-    window.scrollTo(0, 0);
+    lenis?.scrollTo(0);
   }, []);
 
   return (

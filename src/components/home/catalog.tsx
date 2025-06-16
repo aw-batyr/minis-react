@@ -8,7 +8,8 @@ const cards = [
     title: "mini's <br /> umbrella",
     imgUrl: "/catalog/1.png",
     className: "md:absolute left-0 !rotate-0 md:!-rotate-[4deg] top-[10vw]",
-    imgPos: "absolute md:top-[0.5vw] -top-[2vw] right-[3vw] md:h-auto h-[55vw]",
+    imgPos:
+      "absolute md:!top-[0.5vw] !-top-[2vw] right-[3vw] md:h-auto h-[55vw]",
   },
   {
     title: "mini's dragee",

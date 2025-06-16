@@ -31,13 +31,13 @@ export const Header: FC<Props> = ({ className }) => {
         className
       )}
     >
-      <Link to="/">
+      <a href="/">
         <img
           src="/logo.svg"
           alt="logo"
           className="md:size-[5vw] size-[20vw] cursor-pointer"
         />
-      </Link>
+      </a>
 
       <Burger />
 

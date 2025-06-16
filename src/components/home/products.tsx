@@ -99,14 +99,14 @@ export const Products: FC = () => {
         </div>
 
         {[...Array(3)].map((_, i) => (
-          <Link to={`/product/${i + 1}`}>
+          <a href={`/product/${i + 1}`}>
             <img
               key={i}
               src={`/products/product-${1}.png`}
               alt=""
               className="w-auto h-[80vw] md:h-[40vw] object-cover flex-shrink-0"
             />
-          </Link>
+          </a>
         ))}
       </div>
 
