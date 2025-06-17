@@ -1,15 +1,27 @@
 import { useGSAP } from "@gsap/react";
 import { useBurgerStore } from "../../store/use-burger";
 import gsap from "gsap";
+import { scrollStop } from "../../hooks/use-scroll-lock";
 
 const navData = [
   {
     name: "about",
+    link: "/about",
+  },
+  {
+    name: "products",
+    link: "/#products",
+  },
+  {
+    name: "contacts",
+    link: "/#footer",
   },
 ];
 
 export const Burger = () => {
-  const isOpen = useBurgerStore((state) => state.isOpen);
+  const { isOpen, setIsOpen } = useBurgerStore((state) => state);
+
+  scrollStop();
 
   useGSAP(
     () => {
@@ -20,6 +32,7 @@ export const Burger = () => {
           height: "100vh",
           ease: "circ",
           duration: 1,
+          pointerEvents: "auto",
         });
         gsap.to("#navigation,  #burger-img", {
           opacity: 1,
@@ -32,6 +45,7 @@ export const Burger = () => {
         });
         tl.to("#menu", {
           height: 0,
+          pointerEvents: "none",
         });
       }
     },
@@ -47,8 +61,15 @@ export const Burger = () => {
             id="navigation"
             className="flex flex-[0_0_50%] items-center flex-col justify-center h-full -translate-y-[100%]"
           >
-            {navData.map(({ name }) => (
-              <a key={name} href={`/${name}`} className="uppercase text-[10vw]">
+            {navData.map(({ name, link }) => (
+              <a
+                onClick={() => {
+                  link.includes("#") && setIsOpen(false);
+                }}
+                key={name}
+                href={link}
+                className="uppercase text-[7vw] hover:scale-105 duration-300 ease-in-out transition-all"
+              >
                 {name}
               </a>
             ))}
