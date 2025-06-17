@@ -21,12 +21,12 @@ export const Burger = () => {
           ease: "circ",
           duration: 1,
         });
-        gsap.to("#navigation, #burger-img", {
+        gsap.to("#navigation,  #burger-img", {
           opacity: 1,
           y: 0,
         });
       } else {
-        gsap.to("#navigation, #burger-img", {
+        gsap.to("#navigation,  #burger-img", {
           opacity: 0,
           y: "-100%",
         });
@@ -54,7 +54,7 @@ export const Burger = () => {
             ))}
           </div>
 
-          <div id="burger-img" className="flex-auto">
+          <div id="burger-img" className="flex-auto size-full">
             <img src="/about.png" alt="" className="size-full object-cover" />
           </div>
         </div>
