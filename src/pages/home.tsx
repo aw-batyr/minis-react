@@ -10,7 +10,9 @@ export default function Home() {
       <Hero />
       <Words />
       <Products />
-      <div className="relative bg-[url('/background.png')] h-screen w-full"></div>
+      <div className="bg-[url('/background.png')] bg-no-repeat bg-cover h-[150vh] w-full">
+        <div className=""></div>
+      </div>
       <Slogan />
       <Catalog />
     </div>
