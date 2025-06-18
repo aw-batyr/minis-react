@@ -7,13 +7,19 @@ import {
   Slogan,
   Words,
 } from "../components/home";
+import { useLoaderStore } from "../store/use-loader";
 
 export default function Home() {
+  const setLoading = useLoaderStore((state) => state.setLoading);
+
   useEffect(() => {
-    window.scrollTo(0, 0);
+    setLoading(true);
+
+    return () => setLoading(false);
   }, []);
+
   return (
-    <div className="">
+    <div>
       <Hero />
       <Words />
       <Products />
