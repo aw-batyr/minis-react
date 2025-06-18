@@ -69,11 +69,11 @@ export default function Product() {
       });
 
       gsap.from("#duzum", {
-        y: md ? "100vh" : 0,
+        y: md ? "100vw" : 0,
         x: !md ? "-100vw" : 0,
         delay: isLoading ? 3 : 0,
         duration: 1,
-        ease: "back.out(1.6)",
+        ease: "back.out(1.2)",
       });
 
       gsap.from("#vitamin", {
