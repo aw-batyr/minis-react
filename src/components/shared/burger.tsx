@@ -34,25 +34,26 @@ export const Burger = () => {
 
       if (isOpen) {
         tl.to("#menu", {
-          height: "100vh",
+          height: "100%",
           ease: "circ",
           duration: 1,
           pointerEvents: "auto",
         });
-        gsap.to("#navigation,  #burger-img", {
+        gsap.to("#navigation, #burger-img", {
           opacity: 1,
           y: 0,
           height: "100%",
           width: "100%",
         });
       } else {
-        gsap.to("#navigation,  #burger-img", {
+        gsap.to("#navigation, #burger-img", {
           opacity: 0,
           y: "-100%",
           height: 0,
         });
         tl.to("#menu", {
           height: 0,
+          duration: 1,
           pointerEvents: "none",
         });
       }
