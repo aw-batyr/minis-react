@@ -2,9 +2,11 @@ import { useGSAP } from "@gsap/react";
 import { useBurgerStore } from "../../store/use-burger";
 import gsap from "gsap";
 import { scrollStop } from "../../hooks/use-scroll-lock";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import clsx from "clsx";
+import { useAnimateStore } from "../../store/use-animation";
+import { useLenis } from "lenis/react";
 
 const navData = [
   {
@@ -13,11 +15,13 @@ const navData = [
   },
   {
     name: "products",
-    link: "/#products",
+    link: "/",
+    id: "#products",
+    home: true,
   },
   {
     name: "contacts",
-    link: "/#footer",
+    id: "#footer",
   },
 ];
 
@@ -62,6 +66,22 @@ export const Burger = () => {
     { dependencies: [isOpen] }
   );
 
+  const isLoading = useAnimateStore((state) => state.isLoading);
+  const lenis = useLenis();
+  const navigate = useNavigate();
+
+  const redirect = (id?: string, isHome?: boolean) => {
+    setIsOpen(false);
+
+    if (isHome && id) {
+      navigate("/");
+
+      if (isLoading) setTimeout(() => lenis?.scrollTo(id), 3000);
+      else lenis?.scrollTo(id);
+      lenis?.scrollTo(id);
+    } else if (id) lenis?.scrollTo(id);
+  };
+
   return (
     <div
       id="menu"
@@ -73,10 +93,10 @@ export const Burger = () => {
             id="navigation"
             className="flex flex-[0_0_50%] items-center flex-col justify-center h-full -translate-y-[100%]"
           >
-            {navData.map(({ name, link }, i) => (
+            {navData.map(({ name, link, home, id }, i) => (
               <Link
                 onClick={() => {
-                  setIsOpen(false);
+                  redirect(id, home);
                 }}
                 onMouseEnter={() => {
                   setIsEnter(true);
@@ -87,7 +107,7 @@ export const Burger = () => {
                   setIsHover(0);
                 }}
                 key={name}
-                to={link}
+                to={link ?? ""}
                 className={clsx(
                   "uppercase md:text-[7vw] text-[17vw] duration-300 sleading-[110%] ease-in-out transition-all",
                   isEnter && isHover !== i + 1 && "opacity-50"

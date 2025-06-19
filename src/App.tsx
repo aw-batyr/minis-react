@@ -3,9 +3,16 @@ import { Footer, Header, Loader } from "./components/layout";
 import ReactLenis from "lenis/react";
 import { Burger } from "./components/shared";
 import { useLoaderStore } from "./store/use-loader";
+import { useEffect } from "react";
 
 function App() {
-  const isLoading = useLoaderStore((state) => state.isLoading);
+  const { setLoading, isLoading } = useLoaderStore((state) => state);
+
+  useEffect(() => {
+    setLoading(true);
+
+    return () => setLoading(false);
+  }, []);
 
   return (
     <ReactLenis

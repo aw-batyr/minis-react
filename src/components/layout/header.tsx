@@ -18,7 +18,7 @@ export const Header: FC<Props> = ({ className }) => {
         className
       )}
     >
-      <Link to="/">
+      <Link onClick={() => setIsOpen(false)} to="/">
         <img
           src="/logo.svg"
           alt="logo"

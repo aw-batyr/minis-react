@@ -74,7 +74,6 @@ export const Hero: FC = () => {
     { scope: containerRef }
   );
 
-  // Вспомогательная функция для добавления ref
   const addToAnimatedItemsRefs = (
     el: HTMLImageElement | null,
     index: number
@@ -84,6 +83,7 @@ export const Hero: FC = () => {
 
   return (
     <section
+      id="hero"
       ref={containerRef}
       className="relative md:h-screen h-[70vh] overflow-hidden"
     >
