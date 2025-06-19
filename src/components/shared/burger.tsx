@@ -71,11 +71,11 @@ export const Burger = () => {
 
   const lenis = useLenis();
 
-  const onLink = (str: string) => {
+  const onLink = (str?: string) => {
     setIsOpen(false);
 
-    if (str === "#products") setRedirect(str);
-    else lenis?.scrollTo(str);
+    if (str === "#products") setRedirect(str ?? "");
+    else lenis?.scrollTo(str ?? "");
   };
 
   return (
