@@ -89,17 +89,17 @@ export const Catalog = () => {
   return (
     <section
       id="catalog"
-      className="w-full flex flex-col items-center py-[15vw] md:justify-center text-center"
+      className="w-full flex flex-col items-center py-[6vw] md:justify-center text-center"
     >
       <h3
         id="catalog-title"
-        className="text-[#865720] font-bold text-[10vw] md:text-[2vw] md:mb-[1.25vw] mb-[5vw]"
+        className="text-[#865720] font-bold text-[10vw] md:text-[5vw] md:mb-[1.25vw] mb-[5vw]"
       >
         Our Story Begins
       </h3>
       <p
         id="catalog-text"
-        className="text-[#523122] proxima will-change-transform md:w-[46vw] md:mb-0 mb-[10vw] w-[80vw] md:text-[0.93vw] text-[3vw] md:leading-[100%] leading-[125%]"
+        className="text-[#523122] proxima will-change-transform md:w-[46vw] md:mb-0 mb-[10vw] w-[80vw] md:text-[1vw] text-[3vw] md:leading-[100%] leading-[125%]"
       >
         Minis was born from a simple yet powerful idea: to create miniature
         delights that bring joy. Founded by a team of food enthusiasts, we've
