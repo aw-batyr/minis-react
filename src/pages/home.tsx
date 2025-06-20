@@ -17,8 +17,6 @@ export default function Home() {
 
   const { redirectSection } = useRedirectStore((state) => state);
 
-  console.log(redirectSection);
-
   redirectSection
     ? lenis?.scrollTo(redirectSection)
     : lenis?.scrollTo("#hero", {
