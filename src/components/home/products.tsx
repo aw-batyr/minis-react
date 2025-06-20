@@ -35,7 +35,7 @@ export const Products: FC = () => {
         scrollTrigger: {
           trigger: md ? horizontalRef.current : textRef.current,
           start: "top 90%",
-          end: "bottom 100%",
+          end: "bottom 80%",
           scrub: 1,
         },
       });
