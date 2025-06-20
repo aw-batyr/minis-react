@@ -9,20 +9,20 @@ const cards = [
     imgUrl: "/catalog/1.png",
     className: "md:absolute left-0 !rotate-0 md:!-rotate-[4deg] top-[10vw]",
     imgPos:
-      "absolute md:!top-[0.5vw] !-top-[2vw] right-[3vw] md:h-auto h-[55vw]",
+      "absolute md:!top-[0.5vw] !-top-[2vw] right-[3vw] md:h-[15vw] h-[55vw]",
   },
   {
     title: "mini's dragee",
     imgUrl: "/catalog/2.png",
     className: "md:absolute md:pos-x !rotate-0 bottom-[2vw] md:!rotate-[4deg]",
-    imgPos: "pos-x md:top-[1vw] top-[4vw] md:h-auto h-[35vw]",
+    imgPos: "pos-x md:top-[1vw] top-[4vw] md:h-[10vw] h-[35vw]",
   },
   {
     title: "mini's <br /> cornetto",
     imgUrl: "/catalog/3.png",
     className: "md:absolute right-0 !rotate-0 top-[8vw]",
     imgPos:
-      "absolute md:top-[1.5vw] top-[5vw] md:right-[1vw] md:h-auto h-[35vw]",
+      "absolute md:top-[1.5vw] top-[5vw] md:right-[1vw] md:h-[10vw] h-[35vw]",
   },
 ];
 
