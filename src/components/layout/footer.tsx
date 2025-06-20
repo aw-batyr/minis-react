@@ -25,8 +25,8 @@ export const Footer: FC<Props> = ({ className }) => {
       gsap.from(chars, {
         scrollTrigger: {
           trigger: footerRef.current,
-          start: "top top",
-          end: "top 100%",
+          start: "top 70%",
+          end: "bottom 30%",
         },
         y: 200,
         stagger: 0.05,
