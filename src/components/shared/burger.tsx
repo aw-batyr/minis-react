@@ -1,9 +1,8 @@
 import { useGSAP } from "@gsap/react";
 import { useBurgerStore } from "../../store/use-burger";
 import gsap from "gsap";
-import { scrollStop } from "../../hooks/use-scroll-lock";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import clsx from "clsx";
 import { useRedirectStore } from "../../store/use-redirect";
 import { useLenis } from "lenis/react";
@@ -30,10 +29,16 @@ export const Burger = () => {
   const { isOpen, setIsOpen } = useBurgerStore((state) => state);
   const [isHover, setIsHover] = useState(0);
   const [isEnter, setIsEnter] = useState(false);
+  const lenis = useLenis();
 
   const setRedirect = useRedirectStore((state) => state.setRedirect);
 
-  scrollStop();
+  useEffect(() => {
+    if (!lenis) return;
+    lenis.stop();
+
+    return () => lenis.start();
+  }, [lenis]);
 
   useGSAP(
     () => {
@@ -68,8 +73,6 @@ export const Burger = () => {
 
     { dependencies: [isOpen] }
   );
-
-  const lenis = useLenis();
 
   const onLink = (str?: string) => {
     setIsOpen(false);

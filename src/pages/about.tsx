@@ -5,7 +5,6 @@ import { SplitText } from "gsap/SplitText";
 import { CatalogCard } from "../components/shared/catalog-card";
 import { useLenis } from "lenis/react";
 import { useEffect, useRef } from "react";
-import { useAnimateStore } from "../store/use-animation";
 import { useLoaderStore } from "../store/use-loader";
 
 const cards = [
@@ -58,17 +57,17 @@ export default function About() {
           duration: 0.2,
           stagger: 0.05,
         });
-      });
 
-      const { lines } = new SplitText("#cover-text", {
-        type: "lines",
-        mask: "lines",
-      });
+        const { lines } = new SplitText("#cover-text", {
+          type: "lines",
+          mask: "lines",
+        });
 
-      gsap.from(lines, {
-        y: 200,
-        stagger: 0.3,
-        delay: loading ? 3 : 0,
+        gsap.from(lines, {
+          y: 200,
+          stagger: 0.3,
+          delay: loading ? 3 : 0,
+        });
       });
 
       gsap.from(".catalog-card", {

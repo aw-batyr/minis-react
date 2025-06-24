@@ -12,24 +12,26 @@ export const Words: FC = () => {
 
   useGSAP(
     () => {
-      const { chars, revert } = new SplitText(".words", {
-        type: "chars, lines, words",
-        linesClass: "line++",
-      });
+      document.fonts.ready.then(() => {
+        const { chars, revert } = new SplitText(".words", {
+          type: "chars, lines, words",
+          linesClass: "line++",
+        });
 
-      gsap.from(chars, {
-        scrollTrigger: {
-          trigger: chars,
-          markers: false,
-          scrub: true,
-          start: `top ${window.innerHeight / 2.5}px`,
-          end: "bottom 10%",
-        },
-        autoAlpha: 0.5,
-        stagger: 0.5,
-        onComplete: () => {
-          revert();
-        },
+        gsap.from(chars, {
+          scrollTrigger: {
+            trigger: chars,
+            markers: false,
+            scrub: true,
+            start: `top ${window.innerHeight / 2.5}px`,
+            end: "bottom 10%",
+          },
+          autoAlpha: 0.5,
+          stagger: 0.5,
+          onComplete: () => {
+            revert();
+          },
+        });
       });
 
       gsap.fromTo(

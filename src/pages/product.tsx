@@ -44,16 +44,18 @@ export default function Product() {
 
   useGSAP(
     () => {
-      const { chars } = new SplitText("#title", {
-        type: "chars, lines",
-        mask: "lines",
-      });
-
       const titleTl = gsap.timeline({ delay: isLoading ? 2.7 : 0 });
 
-      titleTl.from(chars, {
-        y: "100%",
-        stagger: 0.05,
+      document.fonts.ready.then(() => {
+        const { chars } = new SplitText("#title", {
+          type: "chars, lines",
+          mask: "lines",
+        });
+
+        titleTl.from(chars, {
+          y: "100%",
+          stagger: 0.05,
+        });
       });
 
       titleTl.from("#title-card", {

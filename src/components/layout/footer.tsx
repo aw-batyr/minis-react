@@ -17,19 +17,21 @@ export const Footer: FC<Props> = ({ className }) => {
   const footerRef = useRef(null);
   useGSAP(
     () => {
-      const { chars } = new SplitText("#hashtag", {
-        type: "chars, lines",
-        mask: "lines",
-      });
+      document.fonts.ready.then(() => {
+        const { chars } = new SplitText("#hashtag", {
+          type: "chars, lines",
+          mask: "lines",
+        });
 
-      gsap.from(chars, {
-        scrollTrigger: {
-          trigger: footerRef.current,
-          start: "top 70%",
-          end: "bottom 30%",
-        },
-        y: 200,
-        stagger: 0.05,
+        gsap.from(chars, {
+          scrollTrigger: {
+            trigger: footerRef.current,
+            start: "top 70%",
+            end: "bottom 30%",
+          },
+          y: 200,
+          stagger: 0.05,
+        });
       });
     },
     { scope: footerRef }

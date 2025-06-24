@@ -20,24 +20,26 @@ export const Products: FC = () => {
 
   useGSAP(
     () => {
-      const { chars } = new SplitText(textRef.current, {
-        type: "chars, lines",
-        charsClass: "char++",
-        linesClass: "product-line++",
-        mask: "lines",
-      });
+      document.fonts.ready.then(() => {
+        const { chars } = new SplitText(textRef.current, {
+          type: "chars, lines",
+          charsClass: "char++",
+          linesClass: "product-line++",
+          mask: "lines",
+        });
 
-      gsap.from(chars, {
-        y: 300,
-        stagger: 0.1,
-        duration: 0.4,
-        willChange: "transform",
-        scrollTrigger: {
-          trigger: md ? horizontalRef.current : textRef.current,
-          start: "top 90%",
-          end: "bottom 80%",
-          scrub: 1,
-        },
+        gsap.from(chars, {
+          y: 300,
+          stagger: 0.1,
+          duration: 0.4,
+          willChange: "transform",
+          scrollTrigger: {
+            trigger: md ? horizontalRef.current : textRef.current,
+            start: "top 90%",
+            end: "bottom 80%",
+            scrub: 1,
+          },
+        });
       });
 
       gsap.from(".minis-text", {
@@ -120,7 +122,7 @@ export const Products: FC = () => {
         ))}
       </div>
 
-      <div className="flex justify-center w-full mx-auto relative z-[100] md:pb-[5vw] md:pt-[5vw] py-[10vw]">
+      <div className="flex justify-center w-full mx-auto relative z-[100] md:pb-[5vw] md:pt-[10vw] py-[10vw]">
         <button onClick={() => lenis?.scrollTo("#")} className="btn">
           See All
         </button>

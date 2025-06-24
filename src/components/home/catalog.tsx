@@ -30,42 +30,23 @@ gsap.registerPlugin(SplitText);
 
 export const Catalog = () => {
   useGSAP(() => {
-    const { chars } = new SplitText("#catalog-title", {
-      type: "chars, lines",
-      mask: "lines",
+    document.fonts.ready.then(() => {
+      const { chars } = new SplitText("#catalog-title", {
+        type: "chars, lines",
+        mask: "lines",
+      });
+
+      gsap.from(chars, {
+        y: 200,
+        duration: 0.3,
+        scrollTrigger: {
+          trigger: chars,
+          start: "top 100%",
+          end: "bottom 20%",
+        },
+        stagger: 0.05,
+      });
     });
-
-    // const { lines } = new SplitText("#catalog-text", {
-    //   type: "chars, lines",
-    //   smartWrap: true,
-    //   autoSplit: true,
-    // });
-
-    gsap.from(chars, {
-      y: 200,
-      duration: 0.3,
-      scrollTrigger: {
-        trigger: chars,
-        start: "top 100%",
-        end: "bottom 20%",
-      },
-      stagger: 0.05,
-    });
-
-    // gsap.from(lines, {
-    //   autoAlpha: 0,
-    //   y: 100,
-    //   duration: 0.3,
-    //   scrollTrigger: {
-    //     trigger: "#catalog",
-    //     start: "top 80%",
-    //     end: "bottom 20%",
-    //   },
-    //   stagger: {
-    //     each: 0.5,
-    //     amount: 0.5,
-    //   },
-    // });
 
     gsap.from(".catalog-card", {
       scrollTrigger: {
