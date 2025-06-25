@@ -1,83 +1,58 @@
 import { useGSAP } from "@gsap/react";
 import { useBurgerStore } from "../../store/use-burger";
 import gsap from "gsap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import clsx from "clsx";
 import { useRedirectStore } from "../../store/use-redirect";
 import { useLenis } from "lenis/react";
 
 const navData = [
-  {
-    name: "about",
-    link: "/about",
-    notSection: true,
-  },
-  {
-    name: "products",
-    link: "/#products",
-    home: true,
-  },
-  {
-    name: "contacts",
-    link: "/#footer",
-  },
+  { name: "about", link: "/about", id: undefined },
+  { name: "products", link: "/", id: "#products" },
+  { name: "contacts", link: "/", id: "#footer" },
 ];
-
 export const Burger = () => {
   const { isOpen, setIsOpen } = useBurgerStore((state) => state);
-  const [isHover, setIsHover] = useState(0);
-  const [isEnter, setIsEnter] = useState(false);
+  const [hovered, setHovered] = useState<number | null>(null);
+  const navigate = useNavigate();
   const lenis = useLenis();
 
   const setRedirect = useRedirectStore((state) => state.setRedirect);
 
   useEffect(() => {
     if (!lenis) return;
-    lenis.stop();
-
-    return () => lenis.start();
-  }, [lenis]);
+    if (isOpen) lenis.stop();
+    else lenis.start();
+  }, [isOpen, lenis]);
 
   useGSAP(
     () => {
       const tl = gsap.timeline();
-
       if (isOpen) {
         tl.to("#menu", {
           height: "100%",
-          ease: "circ",
           duration: 1,
+          ease: "circ.out",
           pointerEvents: "auto",
-        });
-        gsap.to("#navigation, #burger-img", {
-          opacity: 1,
-          y: 0,
-          height: "100%",
-          width: "100%",
-        });
+        }).to("#navigation", { opacity: 1, duration: 0.5 }, "<");
       } else {
-        gsap.to("#navigation, #burger-img", {
-          opacity: 0,
-          y: "-100%",
-          height: 0,
-        });
-        tl.to("#menu", {
-          height: 0,
-          duration: 1,
-          pointerEvents: "none",
-        });
+        tl.to(
+          "#menu",
+          { height: 0, duration: 1, pointerEvents: "none" },
+          "<"
+        ).to("#navigation", { opacity: 1, duration: 0.5 }, "<");
       }
     },
-
     { dependencies: [isOpen] }
   );
 
-  const onLink = (link: string, notSection?: boolean) => {
+  const onLinkClick = (link: string, sectionId?: string) => {
     setIsOpen(false);
-
-    !notSection && setRedirect(link);
-    link === "#footer" && lenis?.scrollTo("#footer");
+    if (sectionId) {
+      setRedirect(sectionId);
+    }
+    navigate(link);
   };
 
   return (
@@ -91,30 +66,24 @@ export const Burger = () => {
             id="navigation"
             className="flex flex-[0_0_50%] items-center flex-col justify-center h-full -translate-y-[100%]"
           >
-            {navData.map(({ name, link, notSection }, i) => (
-              <Link
-                onClick={() => onLink(link, notSection)}
-                onMouseEnter={() => {
-                  setIsEnter(true);
-                  setIsHover(i + 1);
-                }}
-                onMouseLeave={() => {
-                  setIsEnter(false);
-                  setIsHover(0);
-                }}
+            {navData.map(({ name, link, id }, i) => (
+              <button
                 key={name}
-                to={link}
+                onClick={() => onLinkClick(link, id)}
+                onMouseEnter={() => setHovered(i)}
+                onMouseLeave={() => setHovered(null)}
                 className={clsx(
-                  "uppercase md:text-[7vw] text-[17vw] duration-300 sleading-[110%] ease-in-out transition-all",
-                  isEnter && isHover !== i + 1 && "opacity-50"
+                  "uppercase text-[#553124] transition-opacity duration-200",
+                  hovered !== null && hovered !== i && "opacity-50",
+                  "md:text-[7vw] text-[17vw]"
                 )}
               >
                 {name}
-              </Link>
+              </button>
             ))}
           </div>
 
-          <div id="burger-img" className="flex-auto size-0">
+          <div id="burger-img" className="flex-auto size-full">
             <img src="/about.png" alt="" className="size-full object-cover" />
           </div>
         </div>

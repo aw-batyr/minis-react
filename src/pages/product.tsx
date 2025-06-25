@@ -36,11 +36,10 @@ export default function Product() {
   const isLoading = useLoaderStore((state) => state.isLoading);
 
   useEffect(() => {
-    lenis?.scrollTo(0, {
-      duration: 0,
-      lerp: 0,
-    });
-  }, []);
+    if (lenis) {
+      lenis.scrollTo(0, { duration: 0, lerp: 0 });
+    }
+  }, [lenis]);
 
   useGSAP(
     () => {
