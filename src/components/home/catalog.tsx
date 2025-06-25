@@ -30,22 +30,20 @@ gsap.registerPlugin(SplitText);
 
 export const Catalog = () => {
   useGSAP(() => {
-    document.fonts.ready.then(() => {
-      const { chars } = new SplitText("#catalog-title", {
-        type: "chars, lines",
-        mask: "lines",
-      });
+    const { chars } = new SplitText("#catalog-title", {
+      type: "chars, lines",
+      mask: "lines",
+    });
 
-      gsap.from(chars, {
-        y: 200,
-        duration: 0.3,
-        scrollTrigger: {
-          trigger: chars,
-          start: "top 100%",
-          end: "bottom 20%",
-        },
-        stagger: 0.05,
-      });
+    gsap.from(chars, {
+      y: 200,
+      duration: 0.3,
+      scrollTrigger: {
+        trigger: chars,
+        start: "top 100%",
+        end: "bottom 20%",
+      },
+      stagger: 0.05,
     });
 
     gsap.from(".catalog-card", {

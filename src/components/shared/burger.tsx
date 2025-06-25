@@ -11,17 +11,16 @@ const navData = [
   {
     name: "about",
     link: "/about",
-    id: "",
+    notSection: true,
   },
   {
     name: "products",
-    link: "/",
-    id: "#products",
+    link: "/#products",
     home: true,
   },
   {
     name: "contacts",
-    id: "#footer",
+    link: "/#footer",
   },
 ];
 
@@ -74,11 +73,11 @@ export const Burger = () => {
     { dependencies: [isOpen] }
   );
 
-  const onLink = (str?: string) => {
+  const onLink = (link: string, notSection?: boolean) => {
     setIsOpen(false);
 
-    if (str === "#products") setRedirect(str ?? "");
-    else lenis?.scrollTo(str ?? "");
+    !notSection && setRedirect(link);
+    link === "#footer" && lenis?.scrollTo("#footer");
   };
 
   return (
@@ -92,9 +91,9 @@ export const Burger = () => {
             id="navigation"
             className="flex flex-[0_0_50%] items-center flex-col justify-center h-full -translate-y-[100%]"
           >
-            {navData.map(({ name, link, id }, i) => (
+            {navData.map(({ name, link, notSection }, i) => (
               <Link
-                onClick={() => onLink(id)}
+                onClick={() => onLink(link, notSection)}
                 onMouseEnter={() => {
                   setIsEnter(true);
                   setIsHover(i + 1);
@@ -104,7 +103,7 @@ export const Burger = () => {
                   setIsHover(0);
                 }}
                 key={name}
-                to={link ?? id}
+                to={link}
                 className={clsx(
                   "uppercase md:text-[7vw] text-[17vw] duration-300 sleading-[110%] ease-in-out transition-all",
                   isEnter && isHover !== i + 1 && "opacity-50"

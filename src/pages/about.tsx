@@ -41,33 +41,31 @@ export default function About() {
 
   useGSAP(
     () => {
-      document.fonts.ready.then(() => {
-        const { chars } = new SplitText("#catalog-title", {
-          type: "chars, lines",
-          mask: "lines",
-        });
+      const { chars } = new SplitText("#catalog-title", {
+        type: "chars, lines",
+        mask: "lines",
+      });
 
-        gsap.from(chars, {
-          scrollTrigger: {
-            trigger: "#catalog-title",
-            start: "top 80%",
-            end: "top 20%",
-          },
-          y: 100,
-          duration: 0.2,
-          stagger: 0.05,
-        });
+      gsap.from(chars, {
+        scrollTrigger: {
+          trigger: "#catalog-title",
+          start: "top 80%",
+          end: "top 20%",
+        },
+        y: 200,
+        duration: 0.2,
+        stagger: 0.05,
+      });
 
-        const { lines } = new SplitText("#cover-text", {
-          type: "lines",
-          mask: "lines",
-        });
+      const { lines } = new SplitText("#cover-text", {
+        type: "lines",
+        mask: "lines",
+      });
 
-        gsap.from(lines, {
-          y: 200,
-          stagger: 0.3,
-          delay: loading ? 3 : 0,
-        });
+      gsap.from(lines, {
+        y: 200,
+        stagger: 0.3,
+        delay: loading ? 3 : 0,
       });
 
       gsap.from(".catalog-card", {

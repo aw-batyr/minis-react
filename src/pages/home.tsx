@@ -15,14 +15,15 @@ export default function Home() {
   const setLoading = useLoaderStore((state) => state.setLoading);
   const lenis = useLenis();
 
-  const { redirectSection } = useRedirectStore((state) => state);
+  const { redirectSection, setRedirect } = useRedirectStore((state) => state);
 
-  redirectSection
-    ? lenis?.scrollTo(redirectSection)
-    : lenis?.scrollTo("#hero", {
-        lerp: 0,
-        duration: 0,
-      });
+  console.log(redirectSection);
+
+  useEffect(() => {
+    redirectSection && lenis?.scrollTo(redirectSection);
+
+    return () => setRedirect("");
+  }, [redirectSection]);
 
   useEffect(() => {
     setLoading(true);

@@ -20,26 +20,24 @@ export const Products: FC = () => {
 
   useGSAP(
     () => {
-      document.fonts.ready.then(() => {
-        const { chars } = new SplitText(textRef.current, {
-          type: "chars, lines",
-          charsClass: "char++",
-          linesClass: "product-line++",
-          mask: "lines",
-        });
+      const { chars } = new SplitText(textRef.current, {
+        type: "chars, lines",
+        charsClass: "char++",
+        linesClass: "product-line++",
+        mask: "lines",
+      });
 
-        gsap.from(chars, {
-          y: 300,
-          stagger: 0.1,
-          duration: 0.4,
-          willChange: "transform",
-          scrollTrigger: {
-            trigger: md ? horizontalRef.current : textRef.current,
-            start: "top 90%",
-            end: "bottom 80%",
-            scrub: 1,
-          },
-        });
+      gsap.from(chars, {
+        y: 300,
+        stagger: 0.1,
+        duration: 0.4,
+        willChange: "transform",
+        scrollTrigger: {
+          trigger: md ? horizontalRef.current : textRef.current,
+          start: "top 90%",
+          end: "bottom 80%",
+          scrub: 1,
+        },
       });
 
       gsap.from(".minis-text", {

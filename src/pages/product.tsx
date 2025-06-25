@@ -46,16 +46,14 @@ export default function Product() {
     () => {
       const titleTl = gsap.timeline({ delay: isLoading ? 2.7 : 0 });
 
-      document.fonts.ready.then(() => {
-        const { chars } = new SplitText("#title", {
-          type: "chars, lines",
-          mask: "lines",
-        });
+      const { chars } = new SplitText("#title", {
+        type: "chars, lines",
+        mask: "lines",
+      });
 
-        titleTl.from(chars, {
-          y: "100%",
-          stagger: 0.05,
-        });
+      titleTl.from(chars, {
+        y: "100%",
+        stagger: 0.05,
       });
 
       titleTl.from("#title-card", {
@@ -108,7 +106,7 @@ export default function Product() {
           </h2>
           <div
             id="title-card"
-            className="uppercase text-light-brown-block absolute -left-[10vw] md:-left-[4vw] !leading-[95%] !px-[3vw] md:top-[10vw] top-[20vw] outline-[0.5vw] -rotate-[3deg] !text-[17vw] md:!text-[8vw] !bg-[#EFAA5E]"
+            className="uppercase text-light-brown-block absolute -left-[10vw] md:-left-[4vw] !leading-[95%] !px-[3vw] md:top-[8.5vw] top-[20vw] outline-[0.5vw] -rotate-[3deg] !text-[17vw] md:!text-[8vw] !bg-[#EFAA5E]"
           >
             ingredients
           </div>
