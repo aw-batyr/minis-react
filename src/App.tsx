@@ -12,9 +12,9 @@ function App() {
   const lenis = useLenis();
 
   useEffect(() => {
-    if (isOpen) lenis?.stop();
+    if (isOpen || isLoading) lenis?.stop();
     else lenis?.start();
-  }, [isOpen]);
+  }, [isOpen, isLoading]);
 
   useEffect(() => {
     setLoading(true);

@@ -90,14 +90,14 @@ export const Products: FC = () => {
       >
         <h2
           ref={textRef}
-          className="whitespace-nowrap will-change-transform text-center md:text-[7vw] text-[15vw] uppercase text-[#553124] track"
+          className="whitespace-nowrap will-change-transform text-center md:text-[7vw] text-[15vw] leading-[160%] uppercase text-[#553124] track"
         >
           Bizde 6
           <br />
           GORNUSH BAR
         </h2>
 
-        <div className="minis-text inline-block text-light-brown-block md:overflow-hidden leading-none !pb-[1vw] border-[0.4vw] z-50 text-light-brown-block -rotate-[6deg] !px-[3vw] md:!text-[6vw] absolute top-[14vw] left-[33vw] md:left-[12vw]">
+        <div className="minis-text inline-block text-light-brown-block md:overflow-hidden leading-none !pb-[1vw] border-[0.4vw] z-50 text-light-brown-block -rotate-[6deg] !px-[3vw] md:!text-[6vw] absolute top-[13vw] left-[33vw] md:left-[12vw]">
           Mini’s
         </div>
 

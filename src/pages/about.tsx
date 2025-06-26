@@ -6,6 +6,8 @@ import { CatalogCard } from "../components/shared/catalog-card";
 import { useLenis } from "lenis/react";
 import { useEffect, useRef } from "react";
 import { useLoaderStore } from "../store/use-loader";
+import { useRedirectStore } from "../store/use-redirect";
+import { useNavigate } from "react-router-dom";
 
 const cards = [
   {
@@ -31,12 +33,27 @@ export default function About() {
   const lenis = useLenis();
   const containerRef = useRef(null);
   const loading = useLoaderStore((state) => state.isLoading);
+  const { redirectSection, setRedirect } = useRedirectStore((state) => state);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (lenis) {
       lenis.scrollTo(0, { duration: 0, lerp: 0 });
     }
   }, [lenis]);
+
+  useEffect(() => {
+    if (redirectSection && lenis) {
+      lenis.scrollTo(redirectSection);
+      if (loading) setTimeout(() => setRedirect(""), 3000);
+      else setRedirect("");
+    }
+
+    if (redirectSection === "#products") {
+      navigate("/");
+      setRedirect("#products");
+    }
+  }, [redirectSection, lenis]);
 
   useGSAP(
     () => {

@@ -1,22 +1,24 @@
 import { useGSAP } from "@gsap/react";
 import { useBurgerStore } from "../../store/use-burger";
 import gsap from "gsap";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import clsx from "clsx";
 import { useRedirectStore } from "../../store/use-redirect";
 import { useLenis } from "lenis/react";
 
 const navData = [
-  { name: "about", link: "/about", id: undefined },
-  { name: "products", link: "/", id: "#products" },
-  { name: "contacts", link: "/", id: "#footer" },
+  { name: "about", link: "/about", id: "" },
+  { name: "products", link: "/", id: "#products", products: true },
+  { name: "contacts", link: "", id: "#footer" },
 ];
+
 export const Burger = () => {
   const { isOpen, setIsOpen } = useBurgerStore((state) => state);
   const [hovered, setHovered] = useState<number | null>(null);
   const navigate = useNavigate();
   const lenis = useLenis();
+  const setSectionScroll = useRedirectStore((state) => state.setSectionScroll);
 
   const setRedirect = useRedirectStore((state) => state.setRedirect);
 
@@ -47,12 +49,18 @@ export const Burger = () => {
     { dependencies: [isOpen] }
   );
 
-  const onLinkClick = (link: string, sectionId?: string) => {
-    setIsOpen(false);
+  const onLinkClick = (
+    link: string,
+    sectionId?: string,
+    products?: boolean
+  ) => {
     if (sectionId) {
       setRedirect(sectionId);
+    } else if (link) {
+      navigate(link);
+      products && setSectionScroll(products);
     }
-    navigate(link);
+    setIsOpen(false);
   };
 
   return (
@@ -64,7 +72,7 @@ export const Burger = () => {
         <div className="flex flex-col md:flex-row items-center justify-center w-screen text-[#553124]">
           <div
             id="navigation"
-            className="flex flex-[0_0_50%] items-center flex-col justify-center h-full -translate-y-[100%]"
+            className="flex flex-[0_0_50%] items-center flex-col justify-center h-full"
           >
             {navData.map(({ name, link, id }, i) => (
               <button
@@ -73,7 +81,7 @@ export const Burger = () => {
                 onMouseEnter={() => setHovered(i)}
                 onMouseLeave={() => setHovered(null)}
                 className={clsx(
-                  "uppercase text-[#553124] transition-opacity duration-200",
+                  "uppercase text-[#553124] transition-opacity cursor-pointer duration-200",
                   hovered !== null && hovered !== i && "opacity-50",
                   "md:text-[7vw] text-[17vw]"
                 )}
