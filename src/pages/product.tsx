@@ -5,6 +5,8 @@ import { SplitText } from "gsap/SplitText";
 import { useMediaQuery } from "usehooks-ts";
 import { useLenis } from "lenis/react";
 import { useLoaderStore } from "../store/use-loader";
+import { useNavigate } from "react-router-dom";
+import { useRedirectStore } from "../store/use-redirect";
 
 const data = [
   {
@@ -30,6 +32,9 @@ const data = [
 gsap.registerPlugin(SplitText);
 
 export default function Product() {
+  const loading = useLoaderStore((state) => state.isLoading);
+  const { redirectSection, setRedirect } = useRedirectStore((state) => state);
+  const navigate = useNavigate();
   const containerRef = useRef(null);
   const md = useMediaQuery("(min-width: 768px)");
   const lenis = useLenis();
@@ -40,6 +45,19 @@ export default function Product() {
       lenis.scrollTo(0, { duration: 0, lerp: 0 });
     }
   }, [lenis]);
+
+  useEffect(() => {
+    if (redirectSection && lenis) {
+      lenis.scrollTo(redirectSection);
+      if (loading) setTimeout(() => setRedirect(""), 3000);
+      else setRedirect("");
+    }
+
+    if (redirectSection === "#products") {
+      navigate("/");
+      setRedirect("#products");
+    }
+  }, [redirectSection, lenis]);
 
   useGSAP(
     () => {
@@ -85,15 +103,13 @@ export default function Product() {
 
     {
       scope: containerRef,
-      dependencies: [],
     }
   );
 
   return (
     <section
-      id="#main"
       ref={containerRef}
-      className="flex flex-col md:flex-row text-black-bg md:mx-[10vw] mx-[5vw]  gap-[10vw] md:mt-[8vw] mt-[20vw] pb-[10vw]"
+      className="flex flex-col md:flex-row text-black-bg md:mx-[10vw] mx-[5vw] gap-[10vw] md:mt-[8vw] mt-[20vw] pb-[10vw]"
     >
       <div className="md:flex-[0_0_45%] flex flex-col md:items-start items-center">
         <div className="relative md:h-[25vw] h-[50vw]">

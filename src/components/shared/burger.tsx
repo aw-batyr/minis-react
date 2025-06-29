@@ -91,7 +91,7 @@ export const Burger = () => {
             ))}
           </div>
 
-          <div id="burger-img" className="flex-auto size-full">
+          <div id="burger-img" className="flex-auto md:block hidden size-full">
             <img src="/about.png" alt="" className="size-full object-cover" />
           </div>
         </div>
