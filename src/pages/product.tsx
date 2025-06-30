@@ -5,7 +5,7 @@ import { SplitText } from "gsap/SplitText";
 import { useMediaQuery } from "usehooks-ts";
 import { useLenis } from "lenis/react";
 import { useLoaderStore } from "../store/use-loader";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useRedirectStore } from "../store/use-redirect";
 
 const data = [
@@ -38,6 +38,7 @@ export default function Product() {
   const containerRef = useRef(null);
   const md = useMediaQuery("(min-width: 768px)");
   const lenis = useLenis();
+  const { id } = useParams();
   const isLoading = useLoaderStore((state) => state.isLoading);
 
   useEffect(() => {
@@ -155,7 +156,7 @@ export default function Product() {
         />
         <img
           id="product"
-          src="/product/dragee-brown.png"
+          src={`/product/${id}.png`}
           alt="dragee"
           className="absolute -right-[5vw] top-0 md:w-[20vw] w-[50vw] h-auto"
         />

@@ -87,7 +87,7 @@ export const Hero: FC = () => {
     <section
       id="hero"
       ref={containerRef}
-      className="relative md:h-screen h-[70vh] overflow-hidden"
+      className="relative md:h-screen h-[80vh] overflow-hidden"
     >
       {/* Текстовый блок */}
       <div className="relative z-10">

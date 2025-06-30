@@ -69,7 +69,7 @@ export const Burger = () => {
       className="fixed top-0 bg-[#fadcc8] left-0 w-full h-0 z-[60] overflow-hidden"
     >
       <div className="relative h-full grid md:grid-cols-2 grid-cols-1">
-        <div className="flex flex-col md:flex-row items-center justify-center w-screen text-[#553124]">
+        <div className="flex flex-col h-full md:flex-row items-center justify-center w-screen text-[#553124]">
           <div
             id="navigation"
             className="flex flex-[0_0_50%] items-center flex-col justify-center h-full"
@@ -89,6 +89,23 @@ export const Burger = () => {
                 {name}
               </button>
             ))}
+
+            <div className="flex absolute bottom-[8vw] items-center md:text-[1.2vw] text-[5vw] font-thin md:translate-y-[6vw] gap-[4vw] font-sans">
+              <a
+                href="https://www.instagram.com/minis_tm/"
+                target="_blank"
+                className="transition-all hover:opacity-60"
+              >
+                Instagram
+              </a>
+              <a
+                href="https://www.tiktok.com/@minis_tm"
+                target="_blank"
+                className="transition-all hover:opacity-60"
+              >
+                TikTok
+              </a>
+            </div>
           </div>
 
           <div id="burger-img" className="flex-auto md:block hidden size-full">

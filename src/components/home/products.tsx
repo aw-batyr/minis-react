@@ -92,14 +92,14 @@ export const Products: FC = () => {
       >
         <h2
           ref={textRef}
-          className="whitespace-nowrap will-change-transform text-center md:text-[7vw] text-[15vw] leading-[170%] uppercase text-[#553124] track"
+          className="whitespace-nowrap will-change-transform text-center md:text-[7vw] text-[15vw] md:leading-[180%] uppercase text-[#553124] track"
         >
           Bizde 6
           <br />
           GORNUSH BAR
         </h2>
 
-        <div className="minis-text max-w-fit inline-block text-light-brown-block md:overflow-hidden leading-none !pb-[1vw] border-[0.4vw] z-50 text-light-brown-block -rotate-[6deg] !px-[3vw] md:!text-[6vw] absolute md:top-[12vw] top-[14vw] left-[33vw] md:left-[12vw]">
+        <div className="minis-text max-w-fit inline-block text-light-brown-block md:overflow-hidden leading-none !pb-[1vw] border-[0.4vw] z-50 text-light-brown-block -rotate-[6deg] !px-[3vw] md:!text-[6vw] absolute md:top-[14.3vw] top-[14vw] left-[33vw] md:left-[12vw]">
           Mini’s
         </div>
 
@@ -114,7 +114,7 @@ export const Products: FC = () => {
           >
             <img
               key={i}
-              src={`/products/product-${1}.png`}
+              src={`/products/product-${i + 1}.png`}
               alt="product"
               className="size-full object-cover"
             />
@@ -122,7 +122,7 @@ export const Products: FC = () => {
         ))}
       </div>
 
-      <div className="flex justify-center w-full mx-auto relative z-[100] md:pb-[5vw] md:pt-[10vw] py-[10vw]">
+      <div className="flex justify-center w-full mx-auto relative z-20 md:pb-[5vw] md:pt-[10vw] py-[10vw]">
         <button onClick={() => lenis?.scrollTo("#")} className="btn">
           See All
         </button>
