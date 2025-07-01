@@ -66,7 +66,7 @@ export const Products: FC = () => {
           scrollTrigger: {
             trigger: containerRef.current,
             start: "top top",
-            end: `+=${sectionWidth * 1.5}`,
+            end: `+=${sectionWidth * 2}`,
             scrub: 1,
             pin: true,
             anticipatePin: 1,
@@ -88,7 +88,7 @@ export const Products: FC = () => {
       <div
         id=""
         ref={md ? horizontalRef : null}
-        className="md:horizontal relative flex flex-col md:flex-row gap-[15vw] items-center px-[5vw] md:w-[200vw] will-change-transform"
+        className="md:horizontal relative flex flex-col md:flex-row gap-[15vw] items-center px-[5vw] md:w-[300vw] will-change-transform"
       >
         <h2
           ref={textRef}
@@ -103,7 +103,7 @@ export const Products: FC = () => {
           Mini’s
         </div>
 
-        {[...Array(3)].map((_, i) => (
+        {[...Array(5)].map((_, i) => (
           <Link
             key={i}
             to={`/product/${i + 1}`}
@@ -122,7 +122,7 @@ export const Products: FC = () => {
         ))}
       </div>
 
-      <div className="flex justify-center w-full mx-auto relative z-20 md:pb-[5vw] md:pt-[10vw] py-[10vw]">
+      <div className="flex justify-center w-full mx-auto relative z-20 md:pb-[5vw] md:pt-[8vw] py-[10vw]">
         <button onClick={() => lenis?.scrollTo("#")} className="btn">
           See All
         </button>

@@ -14,6 +14,8 @@ const navData = [
 ];
 
 export const Burger = () => {
+  // const [emblaRef] = useEmblaCa
+
   const { isOpen, setIsOpen } = useBurgerStore((state) => state);
   const [hovered, setHovered] = useState<number | null>(null);
   const navigate = useNavigate();
