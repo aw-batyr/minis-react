@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { useCallback, useEffect, type FC } from "react";
+import { useCallback, type FC } from "react";
 import { useBurgerStore } from "../../store/use-burger";
 import { Link, useNavigate } from "react-router-dom";
 import { useLangStore } from "../../store/use-lang";
@@ -69,13 +69,13 @@ export const Header: FC<Props> = ({ className }) => {
         />
       </div>
 
-      <div className="flex items-center uppercase gap-[1vw]">
+      <div className="flex items-center uppercase md:gap-[1vw] gap-[2vw]">
         {langs.map(({ lang }) => (
           <button
             key={lang}
             onClick={() => onLang(lang)}
             className={clsx(
-              "text-[#523122] uppercase transition-colors rounded-full p-[0.5vw] text-[1.5vw] cursor-pointer",
+              "text-[#523122] uppercase transition-colors rounded-full md:p-[0.5vw] p-[1vw] md:text-[1.5vw] text-[6vw] cursor-pointer",
               lang === activeLang && "bg-[#E3A458]"
             )}
           >
