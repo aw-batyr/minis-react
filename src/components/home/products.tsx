@@ -84,11 +84,7 @@ export const Products: FC = () => {
   const blockTitle = useTranslate("favorite", "seçeceksin");
 
   return (
-    <section
-      id="products"
-      ref={containerRef}
-      className="relative overflow-hidden"
-    >
+    <section id="products" ref={containerRef} className="relative ">
       <div
         id=""
         ref={md ? horizontalRef : null}
@@ -110,7 +106,7 @@ export const Products: FC = () => {
             key={i}
             to={`/product/${i + 1}`}
             className={clsx(
-              "md:w-[60vw] w-[80vw] h-auto mt-[2vw]",
+              "md:w-[40vw] w-[80vw] h-auto mt-[2vw]",
               i % 2 === 0 ? "md:rotate-[8deg]" : "md:-rotate-[8deg]"
             )}
           >

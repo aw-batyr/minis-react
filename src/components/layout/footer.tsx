@@ -42,6 +42,14 @@ export const Footer: FC<Props> = ({ className }) => {
     "Adres: Türkmenistan, Ahal ili, Ak bugday ilçesi, Anev şehri, Telekeçiler caddesi 8-inci ev."
   );
 
+  const copyright = useTranslate(
+    "Copyright © 2025 Mini’s - All Rights Reserved",
+    "Copyright © 2025 Mini's - Tüm Hakları Saklıdır"
+  );
+
+  const politics = useTranslate("Privacy Policy", "Gizlilik Politikası");
+  const services = useTranslate("Terms of Sеrvice", "Sеrvis Koşulları");
+
   return (
     <footer
       ref={footerRef}
@@ -130,14 +138,14 @@ export const Footer: FC<Props> = ({ className }) => {
         </div>
 
         <div className="w-full flex items-center justify-between proxima text-[#FAEADE]/50 text-16">
-          <h4>Copyright © 2025 Mini’s - All Rights Reserved</h4>
+          <h4>{copyright}</h4>
 
           <div className="flex items-center gap-[1.25vw]">
             <Link to="" className="hover:opacity-60 transition-opacity">
-              Privacy Policy
+              {politics}
             </Link>
             <Link to="" className="hover:opacity-60 transition-opacity">
-              Terms of Sеrvice
+              {services}
             </Link>
           </div>
         </div>
